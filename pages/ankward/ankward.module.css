@@ -1,0 +1,55 @@
+.container
+{
+
+}
+
+.logo
+{
+    width: 100%;
+    opacity: 0.3;
+}
+
+.content
+{
+    width: max-content;
+    margin: auto;
+    padding-top: 20em;
+}
+
+.text
+{
+    font-family: "Inter";
+    font-size: 1em;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2em;
+}
+
+.button
+{
+    width: max-content;
+    margin: auto;
+}
+
+
+/*PHONE*/
+
+@media only screen and (max-width: 600px) {
+    /*.text {*/
+    /*    text-align: justify;*/
+    /*    font-size: 3em;*/
+    /*}*/
+
+    .button
+    {
+        width: unset;
+    }
+
+    .button .but
+    {
+        width: 100%;
+        height: 4em;
+        margin: auto;
+        display: block;
+    }
+}

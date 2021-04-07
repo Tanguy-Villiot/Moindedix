@@ -64,6 +64,8 @@
   padding-left: 3em;
   padding-right: 3em;
   padding-top: 0.2em;
+  position: absolute;
+  bottom: 0;
 }
 
 
@@ -71,7 +73,31 @@
 /*PHONE*/
 
 @media only screen and (max-width: 600px) {
+
+
+  .container
+  {
+    /*min-height: auto;*/
+    padding-top: 4em;
+
+  }
+
   .title {
     font-size: 2em;
+  }
+
+  .input2
+  {
+    width: 100%;
+  }
+
+  .button{
+    width: 100%;
+  }
+
+  .footer
+  {
+    position: relative;
+    margin-top: 3em;
   }
 }

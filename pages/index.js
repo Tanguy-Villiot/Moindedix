@@ -169,11 +169,11 @@ export default function Home() {
 
 
 
-            <div className={styles.footer + " fixed-bottom"}>
+            <div className={styles.footer}>
 
                 <div>
                     <Navbar>
-                        <Link href="/">
+                        <Link href="/ankward">
                             <Navbar.Brand href="#home" className={styles.link} style={{marginRight: "1.5em", paddingTop: "0.125rem", fontFamily: "Inter-Bold"}}>Ankward</Navbar.Brand>
                         </Link>
                         <Navbar.Toggle />
