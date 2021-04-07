@@ -8,7 +8,7 @@ export default function checkServer(){
 
     const dev = process.env.NODE_ENV !== 'production';
 
-    const server = dev ? 'http://localhost:3000' : 'https://showroom-fawn.vercel.app';
+    const server = dev ? 'http://localhost:3000' : 'https://www.antimoinsdedix.fr';
 
 
     return server;
