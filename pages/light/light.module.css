@@ -1,0 +1,21 @@
+.main
+{
+    min-height: 100vh;
+    background-image: url('../../public/getout.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -160px;
+}
+
+
+/*PHONE*/
+
+@media only screen and (max-width: 600px) {
+    .main {
+        background-size: cover;
+        background-position-y: 0px;
+        background-position-x: -515px;
+
+
+    }
+}
