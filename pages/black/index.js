@@ -4,6 +4,7 @@ import styles from './black.module.css'
 import React, {useState} from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
 import {useRouter} from "next/router";
+import checkServer from "../../component/checkServer";
 
 export default function Black({table}) {
 
@@ -55,17 +56,34 @@ export default function Black({table}) {
             </div>
 
             <div className={styles.curtain}>
-                {router.query.keyword === "paysan" ?
 
-                    <span className={styles.curtain_title}>Papa pourra probablement vous offrir un petit pécule pour quitter votre garconniere</span>
+                {router.query.keyword === undefined ?
+
+                    <></>
 
                     :
 
-                    <span className={styles.curtain_title}>Si tu as la dalle, quitte la capitale !</span>
+                    <>
+
+                        {router.query.keyword === "paysan" ?
+
+                            <span className={styles.curtain_title}>Papa pourra probablement vous offrir un petit pécule pour quitter votre garconniere</span>
+
+                            :
+
+                            <span className={styles.curtain_title}>Si tu as la dalle, quitte la capitale !</span>
+
+
+
+                        }
+
+                    </>
 
 
 
                 }
+
+
 
             </div>
 
@@ -78,7 +96,10 @@ export default function Black({table}) {
 export async function getStaticProps() {
     // Call an external API endpoint to get posts.
     // You can use any data fetching library
-    const res = await fetch("http://localhost:3000/api/getGueux", {
+
+    const server = checkServer();
+
+    const res = await fetch(`${server}/api/getGueux`, {
         method: "GET",
         headers: {"Content-Type": "application/json"}
     });

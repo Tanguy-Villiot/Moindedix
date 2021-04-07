@@ -214,6 +214,11 @@
     font-size: 2em;
   }
 
+  .bar
+  {
+    margin-bottom: 2em;
+  }
+
   .input2
   {
     width: 100%;
@@ -234,10 +239,16 @@
     margin-top: 3em;
   }
 
+  .next
+  {
+    height: 12em;
+  }
+
 
   /*MAINTENANCE*/
   .maintenance
   {
     font-size: 2em;
+    margin-bottom: 0em;
   }
 }
