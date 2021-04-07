@@ -252,3 +252,19 @@
     margin-bottom: 0em;
   }
 }
+
+
+@media only screen and (max-width: 400px) {
+
+  .listLink{
+    font-size: 0.8em;
+  }
+
+
+  .next
+  {
+    height: 13em;
+  }
+
+
+}
