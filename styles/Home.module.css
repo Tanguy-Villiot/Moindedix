@@ -44,7 +44,7 @@
 
 .wrap {
   background: inherit;
-  animation: 7s spin ease-in-out infinite;
+  /*animation: 7s spin ease-in-out infinite;*/
 
   z-index: -50000;
   position: relative;

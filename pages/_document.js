@@ -6,7 +6,6 @@ export default class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <title>Anti Moins de 10</title>
                     <script
                         async
                         src="https://www.googletagmanager.com/gtag/js?id=G-RYMP1QLSC3"
