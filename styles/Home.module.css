@@ -28,6 +28,56 @@
   color: #949494;
 }
 
+
+
+/*MAINTENANCE*/
+
+.maintenance
+{
+  font-family: "Inter-Bold";
+  text-align: center;
+}
+
+.bar
+{
+  width: 50%;
+  height: 2px;
+  background-color: gainsboro;
+  margin: auto;
+  margin-bottom: auto;
+  margin-bottom: 2em;
+}
+
+.next
+{
+  background-color: #e5f2f6;
+  height: 10em;
+  border-radius: 4px;
+}
+
+.next_title
+{
+  font-family: "Inter-Light";
+  text-align: center;
+  margin-top: 2em;
+  padding: 1em;
+  font-size: 1em;
+}
+
+.listLabel
+{
+  font-family: "Inter";
+  padding: 1em;
+}
+
+.listLink
+{
+  font-family: "Inter-Bold";
+}
+
+
+
+
 .home
 {
 
@@ -99,5 +149,12 @@
   {
     position: relative;
     margin-top: 3em;
+  }
+
+
+  /*MAINTENANCE*/
+  .maintenance
+  {
+    font-size: 2em;
   }
 }

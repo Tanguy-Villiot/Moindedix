@@ -6,9 +6,6 @@ import {useRouter} from "next/router";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {TextField} from "@material-ui/core";
 import {MDBCol, MDBRow} from "mdbreact";
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import TwitterIcon from '@material-ui/icons/Twitter';
 
 export default function Home() {
 
@@ -618,7 +615,7 @@ export default function Home() {
         <div className={styles.content}>
 
             <h1 className={styles.title}>#Antimoinsde<span style={{color: "#dd2d2d"}}>10</span></h1>
-            <h3 className={styles.subtitle}>Redorons de prestiges nos villes Françaises !</h3>
+            <h3 className={styles.subtitle}>Redorons de nos villes de prestiges Françaises !</h3>
 
 
         </div>
@@ -626,22 +623,83 @@ export default function Home() {
 
       <div className={"container " + styles.home}>
 
-          <div className={styles.bar}>
-          </div>
+          <Form onSubmit={handleSubmit}>
+              <Form.Label className={styles.label}>MENTIONNER VOTRE SALAIRE</Form.Label>
+              <InputGroup hasValidation className={styles.input}>
+                  <InputGroup.Prepend>
+                      <InputGroup.Text id="inputGroupPrepend">€</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <Form.Control
+                      type="number"
+                      name="money"
+                      placeholder="120000"
+                      aria-describedby="inputGroupPrepend"
+                      value={value}
+                      onChange={handleChange}
+                      required
+                  />
+              </InputGroup>
+              {/*<Form.Label className={styles.label}>VILLE</Form.Label>*/}
+              {/*<InputGroup hasValidation className={styles.input2}>*/}
+              {/*    <Form.Control*/}
+              {/*        type="text"*/}
+              {/*        name="adress"*/}
+              {/*        placeholder="Paris"*/}
+              {/*        aria-describedby="inputGroupPrepend"*/}
+              {/*        value={adress}*/}
+              {/*        onChange={handleChangeAdress}*/}
+              {/*        required*/}
+              {/*    />*/}
+              {/*</InputGroup>*/}
 
-          <h1 className={styles.maintenance}>SITE EN MAINTENANCE. REVENEZ BIENTÔT METTRE LES GUEUX DEHORS !</h1>
+              <MDBRow>
+                  <MDBCol>
+                      <Autocomplete
+                          // multiple
+                          options={departement}
+                          getOptionLabel={(option) => option.dep_name}
+                          onChange={(event, newValue) => {
+                              setDep(newValue);
+                          }}
+                          value={dep}
+                          renderInput={params => (
+                              <TextField
+                                  {...params}
+                                  variant="standard"
+                                  label="Département"
+                                  placeholder="Favorites"
+                                  margin="normal"
+                                  // style={{width: '50%'}}
+                              />
+                          )}
+                      />
+                  </MDBCol>
+                  <MDBCol>
+                      <Autocomplete
+                          id="combo-box-demo"
+                          value={location}
+                          options={commune}
+                          getOptionLabel={(option) => option.nom}
+                          onChange={(event, newValue) => {
+                              setLocation(newValue);
+                          }}
+                          style={{ width: 300 }}
+                          renderInput={(params) => <TextField {...params} label="Ville" variant="outlined" />}
+                      />
+                  </MDBCol>
 
 
-          <div className={styles.next}>
-
-              <h3 className={styles.next_title}>En attendant, vous pouvez nous transmettre votre soutien à cette noble cause</h3>
-
-              <span className={styles.listLabel}><InstagramIcon/> </span><a href="https://www.instagram.com/ankward.fr/" target="_blank"><span className={styles.listLink}>@ankward.fr</span></a><br/>
-              <span className={styles.listLabel}><MailOutlineIcon/> </span><a href="mailto: dehors@antimoinsdedix.fr" target="_blank"><span className={styles.listLink}>dehors@antimoinsdedix.fr</span></a><br/>
-              <span className={styles.listLabel}><TwitterIcon/> </span><span className={styles.listLink}>@ankward.fr</span><br/>
+              </MDBRow>
 
 
-          </div>
+
+
+
+
+              <Button variant="primary" type="submit" className={styles.button}>
+                  Submit
+              </Button>
+          </Form>
 
       </div>
 
