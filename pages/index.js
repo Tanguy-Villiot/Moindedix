@@ -634,7 +634,7 @@ export default function Home() {
 
           <div className={styles.next}>
 
-              <h3 className={styles.next_title}>En attendant, vous pouvez nous transmettre votre soutien à cette noble cause</h3>
+              <h3 className={styles.next_title}>En attendant, n'hésiter pas à nous envoyer un message pour manifester votre soutien à cette noble cause</h3>
 
               <span className={styles.listLabel}><InstagramIcon/> </span><a href="https://www.instagram.com/ankward.fr/" target="_blank"><span className={styles.listLink}>@ankward.fr</span></a><br/>
               <span className={styles.listLabel}><MailOutlineIcon/> </span><a href="mailto: dehors@antimoinsdedix.fr" target="_blank"><span className={styles.listLink}>dehors@antimoinsdedix.fr</span></a><br/>

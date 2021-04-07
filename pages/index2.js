@@ -523,7 +523,9 @@ export default function Home() {
 
     const [dep, setDep] = useState(departement[0])
     const [commune, setCommune] = useState(undefined);
-    const [location, setLocation] = useState(undefined);
+    const [location, setLocation] = useState(null);
+
+    const [enable, setEnable] = useState(false);
 
 
 
@@ -535,6 +537,16 @@ export default function Home() {
         setValue(val);
 
 
+        if(value != null && value != undefined && dep != null && dep != undefined && location != null && location != undefined)
+        {
+            setEnable(true);
+        }
+        else
+        {
+            setEnable(false)
+        }
+
+
 
     }
 
@@ -542,7 +554,9 @@ export default function Home() {
 
         e.preventDefault()
 
-        console.log(value);
+        const adress = location.nom;
+
+
 
         if (value > 10000) {
 
@@ -595,36 +609,81 @@ export default function Home() {
     useEffect(() =>{
 
 
+            if(dep === undefined || dep === null)
+            {
 
-            getcommune(dep.num_dep)
+            }
+            else
+            {
+                getcommune(dep.num_dep)
+            }
 
+
+            if(value != null && value != undefined && dep != null && dep != undefined && location != null && location != undefined)
+            {
+                setEnable(true);
+            }
+            else
+            {
+                setEnable(false)
+            }
 
         },
-        [dep],
+        [dep, location],
     );
 
 
+    //VIEW METHODS
 
+    function BOUTON(){
+
+        if(!enable)
+        {
+            return (
+                <Button variant="primary" type="submit" className={styles.button} disabled>
+                    Valider
+                </Button>
+            )
+        }
+        else
+        {
+            return (
+                <Button variant="primary" type="submit" className={styles.button}>
+                    Valider
+                </Button>
+            )
+        }
+
+    }
 
 
     return (
     <div className={styles.container}>
+
+        <div className={styles.wrap}>
+            <div className={styles.meta}></div>
+            <div className={styles.meta}></div>
+        </div>
+
 
 
 
         <div className={styles.content}>
 
             <h1 className={styles.title}>#Antimoinsde<span style={{color: "#dd2d2d"}}>10</span></h1>
-            <h3 className={styles.subtitle}>Redorons de nos villes de prestiges Françaises !</h3>
-
+            <h3 className={styles.subtitle}>Redorons de prestiges nos villes Françaises !</h3>
+            <div className={styles.bar}>
+            </div>
 
         </div>
 
 
       <div className={"container " + styles.home}>
 
+
+
           <Form onSubmit={handleSubmit}>
-              <Form.Label className={styles.label}>MENTIONNER VOTRE SALAIRE</Form.Label>
+              <Form.Label className={styles.label}>Tester votre éligibilité</Form.Label>
               <InputGroup hasValidation className={styles.input}>
                   <InputGroup.Prepend>
                       <InputGroup.Text id="inputGroupPrepend">€</InputGroup.Text>
@@ -632,25 +691,13 @@ export default function Home() {
                   <Form.Control
                       type="number"
                       name="money"
-                      placeholder="120000"
+                      placeholder="Votre salaire mensuel"
                       aria-describedby="inputGroupPrepend"
                       value={value}
                       onChange={handleChange}
                       required
                   />
               </InputGroup>
-              {/*<Form.Label className={styles.label}>VILLE</Form.Label>*/}
-              {/*<InputGroup hasValidation className={styles.input2}>*/}
-              {/*    <Form.Control*/}
-              {/*        type="text"*/}
-              {/*        name="adress"*/}
-              {/*        placeholder="Paris"*/}
-              {/*        aria-describedby="inputGroupPrepend"*/}
-              {/*        value={adress}*/}
-              {/*        onChange={handleChangeAdress}*/}
-              {/*        required*/}
-              {/*    />*/}
-              {/*</InputGroup>*/}
 
               <MDBRow>
                   <MDBCol>
@@ -668,8 +715,7 @@ export default function Home() {
                                   variant="standard"
                                   label="Département"
                                   placeholder="Favorites"
-                                  margin="normal"
-                                  // style={{width: '50%'}}
+                                  className={styles.field}
                               />
                           )}
                       />
@@ -683,8 +729,15 @@ export default function Home() {
                           onChange={(event, newValue) => {
                               setLocation(newValue);
                           }}
-                          style={{ width: 300 }}
-                          renderInput={(params) => <TextField {...params} label="Ville" variant="outlined" />}
+                          renderInput={(params) => (
+                                  <TextField
+                                      {...params}
+                                      variant="standard"
+                                      label="Ville"
+                                      placeholder="Favorites"
+                                      className={styles.field}
+                                  />
+                              )}
                       />
                   </MDBCol>
 
@@ -696,9 +749,8 @@ export default function Home() {
 
 
 
-              <Button variant="primary" type="submit" className={styles.button}>
-                  Submit
-              </Button>
+
+              <BOUTON />
           </Form>
 
       </div>

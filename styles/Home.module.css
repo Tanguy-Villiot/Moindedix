@@ -23,19 +23,9 @@
 .subtitle
 {
   font-family: Inter;
-  margin-bottom: 2em;
   font-size: 1.2em;
   color: #949494;
-}
-
-
-
-/*MAINTENANCE*/
-
-.maintenance
-{
-  font-family: "Inter-Bold";
-  text-align: center;
+  margin-bottom: 2em;
 }
 
 .bar
@@ -45,6 +35,86 @@
   background-color: gainsboro;
   margin: auto;
   margin-bottom: auto;
+  margin-bottom: 6em;
+
+}
+
+
+/*EFFECTS*/
+
+.wrap {
+  background: inherit;
+  animation: 7s spin ease-in-out infinite;
+
+  z-index: -50000;
+  position: relative;
+  top: 4em;
+}
+
+.meta:before,
+.meta:after {
+  content: "";
+  position: absolute;
+  width:100px;
+  height:100px;
+  left:50%;
+  top:50%;
+  margin:-50px;
+  background: rgba(160,230,245,.9);
+  border-radius:50%;
+  -webkit-filter: blur(25px);
+  filter: blur(25px);
+  animation: move 12s infinite alternate ease-in-out;
+
+}
+.meta:before {
+  animation-duration: 19.3s;
+  animation-delay: -3.3s;
+}
+.meta:nth-child(2):before {
+  animation-duration: 14.7s;
+  animation-delay: -2.7s;
+}
+.meta:nth-child(2):after {
+  animation-duration: 8.7s;
+  animation-delay: -5.32s;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg)
+  }
+}
+@keyframes move {
+  0% {
+    transform: translate(0%, 100%);
+  }
+  15% {
+    transform: translate(-120%, 160%);
+  }
+  30% {
+    transform: translate(100%, -80%);
+  }
+  40% {
+    transform: translate(-140%, 0%);
+  }
+  60% {
+    transform: translate(40%, -80%);
+  }
+  80% {
+    transform: translate(-160%, -20%);
+  }
+  100% {
+    transform: translate(40%, 60%);
+  }
+}
+
+
+/*MAINTENANCE*/
+
+.maintenance
+{
+  font-family: "Inter-Bold";
+  text-align: center;
   margin-bottom: 2em;
 }
 
@@ -87,7 +157,11 @@
 {
   font-family: Inter-Bold;
   letter-spacing: 1px;
-  color: #bd93d8;
+  color: #58a8ff;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2em;
+  text-transform: uppercase;
 }
 
 .input
@@ -105,6 +179,7 @@
 {
   margin-top: 1em;
   float: right;
+  margin-top: 3em;
 }
 
 .footer
@@ -130,6 +205,9 @@
     /*min-height: auto;*/
     padding-top: 4em;
 
+    justify-content: unset;
+
+
   }
 
   .title {
@@ -141,13 +219,18 @@
     width: 100%;
   }
 
+  .field
+  {
+    width: 100%;
+  }
+
   .button{
     width: 100%;
   }
 
   .footer
   {
-    position: relative;
+    /*position: relative;*/
     margin-top: 3em;
   }
 
