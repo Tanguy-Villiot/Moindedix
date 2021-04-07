@@ -48,7 +48,7 @@ export default function Black({table}) {
         <>
             <div className="container">
 
-                <h1 className={styles.title}>Merci de votre participation. Grâce à vous nous s'avons qu'il y a un moins de 10 en plus à chasser de VILLES </h1>
+                <h1 className={styles.title}>Merci de votre participation. Grâce à vous </h1>
                 <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} columns={columns} rows={rows} proSelect />
 
 
@@ -93,7 +93,7 @@ export default function Black({table}) {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     // Call an external API endpoint to get posts.
     // You can use any data fetching library
 
