@@ -11,25 +11,25 @@ function MyApp({ Component, pageProps, router}) {
 
 
     return (
-        <div className="App">
+            <div className="App">
 
-            <PageTransition
-                timeout={TIMEOUT}
-                classNames="page-transition"
-                loadingComponent={<Loader />}
-                loadingDelay={500}
-                loadingTimeout={{
-                    enter: TIMEOUT,
-                    exit: 0,
-                }}
-                loadingClassNames="loading-indicator"
-            >
+                <PageTransition
+                    timeout={TIMEOUT}
+                    classNames="page-transition"
+                    loadingComponent={<Loader />}
+                    loadingDelay={500}
+                    loadingTimeout={{
+                        enter: TIMEOUT,
+                        exit: 0,
+                    }}
+                    loadingClassNames="loading-indicator"
+                >
 
-                <Component {...pageProps} key={router.route}/>
+                    <Component {...pageProps} key={router.route}/>
 
-            </PageTransition>
+                </PageTransition>
 
-            <style jsx global>{`
+                <style jsx global>{`
 .page-transition-enter {
 opacity: 0;
 transform: translate3d(0, 20px, 0);
@@ -58,7 +58,8 @@ transition: opacity ${TIMEOUT}ms;
 `}</style>
 
 
-        </div>
+            </div>
+
 
 
         )
