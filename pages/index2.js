@@ -554,8 +554,7 @@ export default function Home() {
 
         e.preventDefault()
 
-        const adress = location.nom;
-
+        console.log(location.population);
 
 
         if (value > 10000) {
@@ -563,16 +562,40 @@ export default function Home() {
             return router.push("/light");
         } else {
 
-            const response = await fetch("../api/addMoindix", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({adress, value})
-            });
+            if(location.population < 60000)
+            {
 
-            if (response.ok) {
-                console.log("ça marche !");
+                const response = await fetch("../api/addMoindix", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({value, location, dep})
+                });
 
-                return router.push("/black");
+                if (response.ok) {
+                    console.log("ça marche !");
+
+                    router.push({
+                        pathname: '/black',
+                        query: { keyword: 'paysan' },
+                    })
+                }
+
+            }
+            else
+            {
+
+                const response = await fetch("../api/addMoindix", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({value, location, dep})
+                });
+
+                if (response.ok) {
+                    console.log("ça marche !");
+
+                    return router.push("/black");
+                }
+
             }
 
 

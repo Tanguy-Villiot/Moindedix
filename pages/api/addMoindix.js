@@ -13,12 +13,28 @@ handler.post(async (req, res) => {
 
     // data = JSON.parse(data);
 
+
     let doc = await req.db.collection("recensement").insertOne({
 
-        ville: data.adress,
+
+        ville: data.location.nom,
+        departement: data.dep.dep_name,
+        Region: data.dep.region_name,
         money: data.value
 
     })
+
+
+    // {
+    //     "nom": "Ambutrix",
+    //     "code": "01008",
+    //     "codeDepartement": "01",
+    //     "codeRegion": "84",
+    //     "codesPostaux": [
+    //     "01500"
+    // ],
+    //     "population": 750
+    // }
 
     res.json({message : "OK"});
 

@@ -638,13 +638,14 @@ export default function Home() {
 
               <span className={styles.listLabel}><InstagramIcon/> </span><a href="https://www.instagram.com/ankward.fr/" target="_blank"><span className={styles.listLink}>@ankward.fr</span></a><br/>
               <span className={styles.listLabel}><MailOutlineIcon/> </span><a href="mailto: dehors@antimoinsdedix.fr" target="_blank"><span className={styles.listLink}>dehors@antimoinsdedix.fr</span></a><br/>
-              <span className={styles.listLabel}><TwitterIcon/> </span><span className={styles.listLink}>@ankward.fr</span><br/>
+              <span className={styles.listLabel}><TwitterIcon/> </span><a href="https://twitter.com/AnkwardCreation" target="_blank"><span className={styles.listLink}>@AnkwardCreation</span></a><br/>
+
+
 
 
           </div>
 
       </div>
-
 
 
             <div className={styles.footer}>
