@@ -4,6 +4,70 @@
     background-image: url('../../public/getout.png');
     background-repeat: no-repeat;
     background-size: cover;
+
+    opacity: 0;
+    animation: image ease 2.5s;
+    -webkit-animation: image ease 2.5s;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes image {
+    from {
+        top: 0;
+        opacity: 0;
+
+    }
+
+    to {
+        opacity: 1;
+
+    }
+}
+
+
+
+.button
+{
+    position: fixed;
+    left: 50%;
+    bottom: 10px;
+    transform: translate(-50%, -10%);
+    margin: 0 auto;
+    text-align: center;
+    padding: 1em;
+
+
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+
+    opacity: 0;
+    animation: button ease 1s;
+    -webkit-animation: button ease 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+}
+
+@keyframes button {
+    from {
+        opacity: 0;
+
+    }
+
+    to {
+        opacity: 1;
+
+    }
+}
+
+.title
+{
+    font-family: Inter-Bold;
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+    color: white;
 }
 
 
@@ -14,7 +78,20 @@
         background-size: cover;
         background-position-y: 0px;
         background-position-x: -515px;
+    }
 
+    .button
+    {
+        background-color: rgba(255,255,255,0.15);
+        border: unset;
+        box-shadow: unset;
+        backdrop-filter: unset;
+        width: 15em;
+    }
 
+    .title
+    {
+        font-size: 1em;
+        margin-bottom: 1em;
     }
 }

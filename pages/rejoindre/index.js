@@ -1,15 +1,33 @@
-import styles from '../styles/Home.module.css'
-import Link from 'next/link'
-import {Button, Form, InputGroup, Nav, Navbar} from "react-bootstrap";
-import {useEffect, useState} from "react";
-import {useRouter} from "next/router";
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import {TextField} from "@material-ui/core";
+import {Button, Form, InputGroup, Navbar} from "react-bootstrap";
+import Link from "next/link";
+import styles from "./rejoindre.module.css";
+import React, {useContext, useState} from "react";
 import {MDBCol, MDBRow} from "mdbreact";
+import {useRouter} from "next/router";
+import publicIp from "public-ip";
+import ToastifyContext from "../../component/toastify/context";
 
-export default function Home() {
+export const getClientIp = async () => await publicIp.v4({
+    fallbackUrls: [ "https://ifconfig.co/ip" ]
+});
+
+export default function Index(){
 
     const router = useRouter();
+    const toastify = useContext(ToastifyContext);
+
+
+    (async () => {
+        console.log(await publicIp.v6({
+            fallbackUrls: [ "https://ifconfig.co/ip" ]
+        }));
+    })();
+
+    if(router.query.money < 10000 || router.query.departement === "" || router.query.ville === "")
+    {
+        router.push("/");
+    }
+
 
     const departement = [
         {
@@ -519,159 +537,83 @@ export default function Home() {
         }
     ];
 
-    const [value, setValue] = useState();
+    const [value, setValue] = useState({
+        nom: "",
+        prenom: ""
+    })
 
-    const [dep, setDep] = useState(departement[0])
-    const [commune, setCommune] = useState(undefined);
-    const [location, setLocation] = useState(null);
-
-    const [enable, setEnable] = useState(false);
-
-
-
-
-    function handleChange(evt){
-
+    function handleChangeForm(evt) {
         const val = evt.target.value;
-
-        setValue(val);
-
-
-        if(value != null && value != undefined && dep != null && dep != undefined && location != null && location != undefined)
-        {
-            setEnable(true);
-        }
-        else
-        {
-            setEnable(false)
-        }
-
-
+        setValue({
+            ...value,
+            [evt.target.name]: val
+        });
 
     }
+
 
     async function handleSubmit(e) {
 
         e.preventDefault()
 
-        console.log(location.population);
+        const ip = await publicIp.v6({
+            fallbackUrls: [ "https://ifconfig.co/ip" ]
+        });
 
+        const responseIp = await fetch("../api/checkIp", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ip})
+        });
 
-        if (value > 10000) {
+        if (responseIp.ok) {
 
-            return router.push({
-                pathname: '/light',
-                query: {
-                    money: value,
-                    departement: JSON.stringify(dep),
-                    ville: location.nom
-                },
-            })
-        } else {
+            const find = await responseIp.json();
 
-            if(location.population < 60000)
+            if(find.length > 0)
             {
+                toastify.Warning("Vous participation est déjà connu");
 
-                const response = await fetch("../api/addMoindix", {
+            }
+            else
+            {
+                const dep = JSON.parse(router.query.departement);
+
+                const nom = value.nom;
+                const prenom = value.prenom;
+                const departement = dep.dep_name;
+                const region = dep.region_name;
+                const money = router.query.money;
+
+                const response = await fetch("../api/addUser", {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({value, location, dep})
+                    body: JSON.stringify({nom, prenom, departement, region, money, ip})
                 });
 
                 if (response.ok) {
                     console.log("ça marche !");
 
                     router.push({
-                        pathname: '/black',
-                        query: { keyword: 'paysan' },
+                        pathname: '/communaute',
+                        query: {keyword: 'paysan'},
                     })
                 }
-
             }
-            else
-            {
-
-                const response = await fetch("../api/addMoindix", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({value, location, dep})
-                });
-
-                if (response.ok) {
-                    console.log("ça marche !");
-
-                    return router.push("/black");
-                }
-
-            }
-
-
 
         }
 
-
     }
-
-
-    async function getcommune(dep) {
-
-        console.log(dep)
-
-        fetch(`https://geo.api.gouv.fr/departements/${dep}/communes`)
-            .then(res => res.json())
-            .then(result => {
-
-                console.log(result)
-
-                setCommune(result)
-
-                console.log(commune);
-            })
-
-
-
-
-    }
-
-
-
-
-    useEffect(() =>{
-
-
-            if(dep === undefined || dep === null)
-            {
-
-            }
-            else
-            {
-                getcommune(dep.num_dep)
-            }
-
-
-            if(value != null && value != undefined && dep != null && dep != undefined && location != null && location != undefined)
-            {
-                setEnable(true);
-            }
-            else
-            {
-                setEnable(false)
-            }
-
-        },
-        [dep, location],
-    );
-
 
     //VIEW METHODS
 
     function BOUTON(){
 
-        if(!enable)
+        if(value.nom === "" || value.prenom === "")
         {
             return (
                 <Button variant="primary" type="submit" className={styles.button} disabled>
-                    Valider
+                    Valider sa participation
                 </Button>
             )
         }
@@ -679,134 +621,132 @@ export default function Home() {
         {
             return (
                 <Button variant="primary" type="submit" className={styles.button}>
-                    Valider
+                    Valider sa participation
                 </Button>
             )
         }
 
     }
 
+    return(
 
-    return (
-    <div className={styles.container}>
+        <div>
+            <Navbar>
+                <Link href="/">
+                    <Navbar.Brand href="#home" className={styles.linkToHome}>#Antimoinsde<span style={{color: "#dd2d2d"}}>10</span></Navbar.Brand>
+                </Link>
+                <Navbar.Toggle />
 
-        <div className={styles.wrap}>
-            <div className={styles.meta}></div>
-            <div className={styles.meta}></div>
-        </div>
-
-
-
-
-        <div className={styles.content}>
-
-            <h1 className={styles.title}>#Antimoinsde<span style={{color: "#dd2d2d"}}>10</span></h1>
-            <h3 className={styles.subtitle}>Redorons de prestiges nos villes Françaises !</h3>
-            <div className={styles.bar}>
-            </div>
-
-        </div>
+            </Navbar>
 
 
-      <div className={"container " + styles.home}>
+            <div className="container">
 
+                <h1 className={styles.title}>Bienvenue. Ensemble, restituons à nos villes françaises leurs lueurs d'antan !</h1>
+                <div className={styles.bar}>
+                </div>
 
+                <div className={styles.content}>
+                    <h3 className={styles.subtitle}>Remplissez votre nom et prénom pour terminer votre inscription.</h3>
 
-          <Form onSubmit={handleSubmit}>
-              <Form.Label className={styles.label}>Tester votre éligibilité</Form.Label>
-              <InputGroup hasValidation className={styles.input}>
-                  <InputGroup.Prepend>
-                      <InputGroup.Text id="inputGroupPrepend">€</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                      type="number"
-                      name="money"
-                      placeholder="Votre salaire mensuel"
-                      aria-describedby="inputGroupPrepend"
-                      value={value}
-                      onChange={handleChange}
-                      required
-                  />
-              </InputGroup>
+                    <Form onSubmit={handleSubmit}>
 
-              <MDBRow>
-                  <MDBCol>
-                      <Autocomplete
-                          // multiple
-                          options={departement}
-                          getOptionLabel={(option) => option.dep_name}
-                          onChange={(event, newValue) => {
-                              setDep(newValue);
-                          }}
-                          value={dep}
-                          renderInput={params => (
-                              <TextField
-                                  {...params}
-                                  variant="standard"
-                                  label="Département"
-                                  placeholder="Favorites"
-                                  className={styles.field}
-                              />
-                          )}
-                      />
-                  </MDBCol>
-                  <MDBCol>
-                      <Autocomplete
-                          id="combo-box-demo"
-                          value={location}
-                          options={commune}
-                          getOptionLabel={(option) => option.nom}
-                          onChange={(event, newValue) => {
-                              setLocation(newValue);
-                          }}
-                          renderInput={(params) => (
-                                  <TextField
-                                      {...params}
-                                      variant="standard"
-                                      label="Ville"
-                                      placeholder="Favorites"
-                                      className={styles.field}
-                                  />
-                              )}
-                      />
-                  </MDBCol>
+                        <MDBRow className={styles.form_row}>
+                            <MDBCol>
 
+                                <label htmlFor="nom">Nom</label>
+                                <InputGroup hasValidation className={styles.input}>
+                                    <Form.Control
+                                        id="nom"
+                                        type="text"
+                                        name="nom"
+                                        placeholder="Louis"
+                                        aria-describedby="inputGroupPrepend"
+                                        value={value.nom}
+                                        onChange={handleChangeForm}
+                                        required
+                                    />
+                                </InputGroup>
 
-              </MDBRow>
+                            </MDBCol>
+
+                            <MDBCol>
+
+                                <label htmlFor="prenom">Prénom</label>
+                                <InputGroup hasValidation className={styles.input}>
+                                    <Form.Control
+                                        id="prenom"
+                                        type="text"
+                                        name="prenom"
+                                        placeholder="Vignac"
+                                        aria-describedby="inputGroupPrepend"
+                                        value={value.prenom}
+                                        onChange={handleChangeForm}
+                                        required
+                                    />
+                                </InputGroup>
+
+                            </MDBCol>
+
+                        </MDBRow>
 
 
 
 
+                        {/*<MDBRow>*/}
+                        {/*    <MDBCol>*/}
+                        {/*        <Autocomplete*/}
+                        {/*            // multiple*/}
+                        {/*            options={departement}*/}
+                        {/*            getOptionLabel={(option) => option.dep_name}*/}
+                        {/*            onChange={(event, newValue) => {*/}
+                        {/*                setDep(newValue);*/}
+                        {/*            }}*/}
+                        {/*            value={dep}*/}
+                        {/*            renderInput={params => (*/}
+                        {/*                <TextField*/}
+                        {/*                    {...params}*/}
+                        {/*                    variant="standard"*/}
+                        {/*                    label="Département"*/}
+                        {/*                    placeholder="Favorites"*/}
+                        {/*                    className={styles.field}*/}
+                        {/*                />*/}
+                        {/*            )}*/}
+                        {/*        />*/}
+                        {/*    </MDBCol>*/}
+                        {/*    <MDBCol>*/}
+                        {/*        <Autocomplete*/}
+                        {/*            id="combo-box-demo"*/}
+                        {/*            value={location}*/}
+                        {/*            options={commune}*/}
+                        {/*            getOptionLabel={(option) => option.nom}*/}
+                        {/*            onChange={(event, newValue) => {*/}
+                        {/*                setLocation(newValue);*/}
+                        {/*            }}*/}
+                        {/*            renderInput={(params) => (*/}
+                        {/*                <TextField*/}
+                        {/*                    {...params}*/}
+                        {/*                    variant="standard"*/}
+                        {/*                    label="Ville"*/}
+                        {/*                    placeholder="Favorites"*/}
+                        {/*                    className={styles.field}*/}
+                        {/*                />*/}
+                        {/*            )}*/}
+                        {/*        />*/}
+                        {/*    </MDBCol>*/}
 
 
+                        {/*</MDBRow>*/}
 
-              <BOUTON />
-          </Form>
-
-      </div>
-
-
-
-            <div className={styles.footer}>
-
-                <div>
-                    <Navbar>
-                        <Link href="/ankward">
-                            <Navbar.Brand href="#home" className={styles.link} style={{marginRight: "1.5em", paddingTop: "0.125rem", fontFamily: "Inter-Bold"}}>Ankward</Navbar.Brand>
-                        </Link>
-                        <Navbar.Toggle />
-
-                        <Navbar.Collapse className="justify-content-end">
-                            <Nav className="ml-auto white-text">
-                                <span className="text-muted" style={{fontFamily: "Inter-Light"}}>Ceci est une boutade</span>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Navbar>
-
-
+                        <BOUTON />
+                    </Form>
                 </div>
 
             </div>
+
+
         </div>
-  )
+
+    )
+
 }

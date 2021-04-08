@@ -1,0 +1,62 @@
+.linkToHome
+{
+    margin-right: 1.5em;
+    padding-top: 0.125rem;
+    font-family: "Inter-Bold";
+}
+
+.title
+{
+    font-family: Inter-Bold;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    margin-top: 3em;
+    margin-bottom: 2em;
+
+}
+
+.bar
+{
+    width: 50%;
+    height: 2px;
+    background-color: gainsboro;
+    margin: auto;
+    margin-bottom: auto;
+    margin-bottom: 6em;
+
+}
+
+
+.content
+{
+    margin-top: 3em;
+}
+
+.subtitle
+{
+    font-family: Inter;
+    font-size: 1em;
+    text-transform: uppercase;
+    color: #58a8ff;
+}
+
+.form_row
+{
+    margin-top: 2em;
+}
+
+.button
+{
+    float: right;
+    margin-top: 2em;
+}
+
+/*PHONE*/
+
+@media only screen and (max-width: 600px) {
+    .bar
+    {
+        margin-bottom: 2em;
+    }
+}

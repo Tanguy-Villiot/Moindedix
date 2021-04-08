@@ -1,0 +1,36 @@
+.linkToHome
+{
+    margin-right: 1.5em;
+    padding-top: 0.125rem;
+    font-family: "Inter-Bold";
+}
+
+.title
+{
+    font-family: Inter-Bold;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    margin-top: 3em;
+    margin-bottom: 1.5em;
+}
+
+.bar
+{
+    width: 50%;
+    height: 2px;
+    background-color: gainsboro;
+    margin: auto;
+    margin-bottom: auto;
+    margin-bottom: 2em;
+
+}
+
+
+.subtitle
+{
+    color: #58a8ff;
+    font-family: Inter;
+    font-size: 1.5em;
+    margin-top: 2em;
+}
