@@ -6,10 +6,13 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-handler.get(async (req, res) => {
+handler.post(async (req, res) => {
 
+    let data = req.body;
 
-    let doc = await req.db.collection("recensement").find({}).sort({_id:-1}).toArray(function(err, result) {
+    console.log(data);
+
+    let doc = await req.db.collection("recensement").find({Region: data.region}).toArray(function(err, result) {
         if (err) throw err;
 
         console.log(result)
