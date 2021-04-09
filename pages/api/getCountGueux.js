@@ -11,7 +11,7 @@ handler.get(async (req, res) => {
 
     let count = await req.db.collection("recensement").countDocuments({});
 
-    return await res.json(count);
+    return res.json(count);
 
 
 

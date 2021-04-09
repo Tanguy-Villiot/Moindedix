@@ -645,8 +645,6 @@ export default function Home() {
 
     async function getcommune(dep) {
 
-        console.log(dep)
-
         fetch(`https://geo.api.gouv.fr/departements/${dep}/communes`)
             .then(res => res.json())
             .then(result => {
@@ -668,9 +666,10 @@ export default function Home() {
 
 
 
-            getUser()
+             getUser()
                 .then(res => {
-                    setCountUser(res)
+
+                    setCountUser(res);
                 });
 
             getGueux()
@@ -702,6 +701,7 @@ export default function Home() {
     );
 
 
+    // console.log(countUser);
 
     return (
     <div className={styles.container}>
@@ -715,7 +715,6 @@ export default function Home() {
 
 
         <div className={styles.content}>
-
             <h1 className={styles.title}>#Antimoinsde<span style={{color: "#dd2d2d"}}>10</span></h1>
             <h3 className={styles.subtitle}>Redorons de prestiges nos villes Françaises !</h3>
             <div className={styles.bar}>
@@ -733,7 +732,21 @@ export default function Home() {
 
                   <h3 className={styles.statistiques_title}>Membres de la coalition</h3>
 
-                  <span className={styles.statistiques_stat}>{countUser}</span>
+                  <span className={styles.statistiques_stat}>
+
+                      {/*{countUser === undefined ?*/}
+
+                      {/*    <p>Loading</p>*/}
+
+                      {/*:*/}
+
+                          {countUser}
+
+
+                      {/*}*/}
+
+
+                  </span>
 
               </div>
 
