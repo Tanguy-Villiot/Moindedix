@@ -1,15 +1,11 @@
 import styles from '../styles/Home.module.css'
-import Link from 'next/link'
-import {Button, Form, InputGroup, Nav, Navbar} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import {TextField} from "@material-ui/core";
-import {MDBCol, MDBRow} from "mdbreact";
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import Footer from "../component/footer/footer";
+import Head from 'next/head'
 
 export default function Home() {
 
@@ -581,11 +577,8 @@ export default function Home() {
             .then(res => res.json())
             .then(result => {
 
-                console.log(result)
-
                 setCommune(result)
 
-                console.log(commune);
             })
 
 
@@ -613,6 +606,22 @@ export default function Home() {
 
     return (
     <div className={styles.container}>
+
+        <Head>
+            <title>AntiMoinsDeDix</title>
+            <meta name="Content-Type" content="UTF-8"/>
+            <meta name="Content-Language" content="fr"/>
+            <meta name="Description" content="Redonnons ensemble l'éclat d'antan à nos villes françaises !"/>
+            <meta name="Keywords" content="AntiMoinsDeDix"/>
+            <meta name="Copyright" content="Ankward"/>
+            <meta name="Author" content="Ankward"/>
+            <meta name="Identifier-Url" content="antimoinsdedix.fr"/>
+            <meta name="Revisit-After" content="1 day"/>
+            <meta name="Robots" content="all"/>
+            <meta name="Rating" content="general"/>
+            <meta name="Distribution" content="global"/>
+            <meta name="Category" content="internet"/>
+        </Head>
 
 
 

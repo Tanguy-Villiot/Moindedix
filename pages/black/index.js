@@ -1,17 +1,27 @@
 import styles from './black.module.css'
 
-import React, {useState} from 'react';
-import {MDBCol, MDBDataTableV5, MDBRow} from 'mdbreact';
-import {useRouter} from "next/router";
-import checkServer from "../../component/checkServer";
-import {Nav, Navbar, Button, Accordion, Card, Form, InputGroup} from "react-bootstrap";
+import React, {useEffect} from 'react';
+import {Navbar} from "react-bootstrap";
 import Link from "next/link";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import {TextField} from "@material-ui/core";
+import {useRouter} from "next/router";
 
 export default function Black() {
 
+    const router = useRouter();
 
+    useEffect(() =>{
+
+
+        if(router.query.keyword === undefined)
+        {
+            router.push('/')
+        }
+
+
+
+        },
+        [],
+    );
 
     return (
         <>
@@ -36,7 +46,9 @@ export default function Black() {
 
                 {router.query.keyword === undefined ?
 
-                    <></>
+                    <>
+*
+                    </>
 
                     :
 
