@@ -1,0 +1,113 @@
+.title
+{
+    font-family: "Inter-Bold";
+    text-transform: uppercase;
+    font-size: 2em;
+    padding: 1em 2em 0.2em;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.subtitle
+{
+    font-family: Inter;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1em;
+    margin-bottom: 4em;
+    color: #007bff;
+}
+
+/*PreStats*/
+.preStats
+{
+    display: flex;
+    margin-bottom: 4em;
+}
+
+.preStats_item
+{
+    background-color: rgba(88, 168, 255, 0.3);
+    padding: 1em 2em 1em 2em;
+    margin: auto;
+    border-radius: 4px;
+    width: 20em;
+    text-align: center;
+}
+
+.preStats_title
+{
+    font-family: Inter-Bold;
+    text-transform: uppercase;
+    font-size: 1em;
+}
+
+.preStats_stat
+{
+    text-align: center;
+    display: block;
+    font-family: Inter;
+}
+
+.accordion
+{
+    margin-top: 2em;
+}
+
+.Accordion_img
+{
+    height: 1em;
+    margin-right: 1em;
+}
+
+
+/*MOINS DE DIX*/
+
+.Moinsdedix
+{
+    padding: 1em;
+}
+
+.Moinsdedix_last
+{
+    font-family: Inter;
+    padding: 1em 0em 1em 0em;
+}
+
+
+.search
+{
+    font-size: 1em;
+    font-family: Inter;
+    margin-top: 4em;
+    margin-bottom: 2em;
+    text-transform: uppercase;
+    color: #dd2d2d;
+}
+
+.button
+{
+    margin-top: 1em;
+}
+
+.Results
+{
+    background-color: #e5f2f6;
+    margin-top: 3em;
+    padding: 1em;
+    border-radius: 4px;
+}
+
+.Results_content
+{
+    font-family: Inter;
+}
+
+.news
+{
+    font-family: Inter-Bold;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    padding: 2em;
+}

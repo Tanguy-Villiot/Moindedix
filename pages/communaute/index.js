@@ -1,20 +1,16 @@
-import {Navbar} from "react-bootstrap";
+import {Nav, Navbar} from "react-bootstrap";
 import Link from "next/link";
 import styles from "./communaute.module.css";
 import React from "react";
+import Footer from "../../component/footer/footer";
+import NavbarSite from "../../component/navbar/navbar";
 
 export default function Index(){
 
     return(
 
         <div>
-            <Navbar>
-                <Link href="/">
-                    <Navbar.Brand href="#home" className={styles.linkToHome}>#Antimoinsde<span style={{color: "#dd2d2d"}}>10</span></Navbar.Brand>
-                </Link>
-                <Navbar.Toggle />
-
-            </Navbar>
+            <NavbarSite />
 
 
             <div className="container">
@@ -30,6 +26,14 @@ export default function Index(){
 
             </div>
 
+            <div className={styles.curtain}>
+
+                <span className={styles.curtain_title}>Notre coalition compte maintenant un membre de plus !</span>
+
+            </div>
+
+
+            <Footer />
 
         </div>
 

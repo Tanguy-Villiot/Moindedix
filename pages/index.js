@@ -9,6 +9,7 @@ import {MDBCol, MDBRow} from "mdbreact";
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import Footer from "../component/footer/footer";
 
 export default function Home() {
 
@@ -650,24 +651,7 @@ export default function Home() {
 
             <div className={styles.footer}>
 
-                <div>
-                    <Navbar>
-                        <Link href="/ankward">
-                            <Navbar.Brand href="#home" className={styles.link} style={{marginRight: "1.5em", paddingTop: "0.125rem", fontFamily: "Inter-Bold"}}>Ankward</Navbar.Brand>
-                        </Link>
-                        <Navbar.Toggle />
-
-                        <Navbar.Collapse className="justify-content-end">
-                            <Nav className="ml-auto white-text">
-                                <Link href="/reveal">
-                                    <Nav.Link href="#link" className={styles.link}>Contact</Nav.Link>
-                                </Link>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Navbar>
-
-
-                </div>
+                <Footer />
 
             </div>
         </div>

@@ -6,6 +6,8 @@ import {useRouter} from "next/router";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {TextField} from "@material-ui/core";
 import {MDBCol, MDBRow} from "mdbreact";
+import Footer from "../component/footer/footer";
+import checkServer from "../component/checkServer";
 
 export default function Home() {
 
@@ -521,6 +523,8 @@ export default function Home() {
 
     const [value, setValue] = useState();
 
+    const [countUser, setCountUser] = useState(undefined);
+    const [countGueux, setCountGueux] = useState(undefined);
     const [dep, setDep] = useState(departement[0])
     const [commune, setCommune] = useState(undefined);
     const [location, setLocation] = useState(null);
@@ -528,6 +532,32 @@ export default function Home() {
     const [enable, setEnable] = useState(false);
 
 
+    //FETCH METHODS
+
+    async function getUser() {
+        const server = checkServer();
+
+        const res1 = await fetch(`${server}/api/getCountUser`, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"}
+        });
+
+        return await res1.json()
+
+    }
+
+    async function getGueux() {
+
+        const server = checkServer();
+
+        const res2 = await fetch(`${server}/api/getCountGueux`, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"}
+        });
+
+        return await res2.json()
+
+    }
 
 
     function handleChange(evt){
@@ -621,11 +651,9 @@ export default function Home() {
             .then(res => res.json())
             .then(result => {
 
-                console.log(result)
 
                 setCommune(result)
 
-                console.log(commune);
             })
 
 
@@ -637,6 +665,17 @@ export default function Home() {
 
 
     useEffect(() =>{
+
+
+
+            getUser()
+                .then(res => {
+                    setCountUser(res)
+                });
+
+            getGueux()
+                .then(res => setCountGueux(res))
+
 
 
             if(dep === undefined || dep === null)
@@ -663,29 +702,6 @@ export default function Home() {
     );
 
 
-    //VIEW METHODS
-
-    function BOUTON(){
-
-        if(!enable)
-        {
-            return (
-                <Button variant="primary" type="submit" className={styles.button} disabled>
-                    Valider
-                </Button>
-            )
-        }
-        else
-        {
-            return (
-                <Button variant="primary" type="submit" className={styles.button}>
-                    Valider
-                </Button>
-            )
-        }
-
-    }
-
 
     return (
     <div className={styles.container}>
@@ -711,102 +727,145 @@ export default function Home() {
       <div className={"container " + styles.home}>
 
 
+          <div className={styles.statistiques}>
 
-          <Form onSubmit={handleSubmit}>
-              <Form.Label className={styles.label}>Tester votre éligibilité</Form.Label>
-              <InputGroup hasValidation className={styles.input}>
-                  <InputGroup.Prepend>
-                      <InputGroup.Text id="inputGroupPrepend">€</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                      type="number"
-                      name="money"
-                      placeholder="Votre salaire mensuel"
-                      aria-describedby="inputGroupPrepend"
-                      value={value}
-                      onChange={handleChange}
-                      required
-                  />
-              </InputGroup>
+              <div className={styles.statistiques_item}>
 
-              <MDBRow>
-                  <MDBCol>
-                      <Autocomplete
-                          // multiple
-                          options={departement}
-                          getOptionLabel={(option) => option.dep_name}
-                          onChange={(event, newValue) => {
-                              setDep(newValue);
-                          }}
-                          value={dep}
-                          renderInput={params => (
-                              <TextField
-                                  {...params}
-                                  variant="standard"
-                                  label="Département"
-                                  placeholder="Favorites"
-                                  className={styles.field}
+                  <h3 className={styles.statistiques_title}>Membres de la coalition</h3>
+
+                  <span className={styles.statistiques_stat}>{countUser}</span>
+
+              </div>
+
+              <div className={styles.statistiques_itemButton}>
+
+                  <Link href="/statistique">
+                      <Button variant="link" className={styles.buttonStats}>
+                          Voir toutes les statistiques
+                      </Button>
+                  </Link>
+
+
+              </div>
+
+              <div className={styles.statistiques_item}>
+
+                  <h3 className={styles.statistiques_title}>Moins de 10 repéré</h3>
+
+                  <span className={styles.statistiques_stat}>{countGueux}</span>
+
+
+              </div>
+
+          </div>
+
+
+
+
+
+          <div className={styles.explain}>
+
+              <div className={styles.explain_titlecontent}>
+                  <img src="/france.svg" className={styles.france} alt="france"/>
+                  <h3 className={styles.explain_title}>Qui sommes-nous ?</h3>
+
+              </div>
+              <span className={styles.explain_text}>AntiMoinsDe<span style={{color: "#dd2d2d"}}>10</span> est un parti politique créé en 2020 par une coalition de personne bien née parisien.</span>
+              <span className={styles.explain_text}>Nous avons pour vocation à mettre dehors de nos villes françaises, jadis exemple de pureté et d'élégance, les personnes gagnant moins de 10.000euros par mois.</span><br/>
+
+          </div>
+
+
+          <div className={styles.formulaireContainer}>
+
+              <div className={styles.formulaire}>
+                  <Form onSubmit={handleSubmit}>
+                      <Form.Label className={styles.label}>Rejoignez la communauté, tester votre éligibilité</Form.Label>
+                      <InputGroup hasValidation className={styles.input}>
+                          <InputGroup.Prepend>
+                              <InputGroup.Text id="inputGroupPrepend" className={styles.inputSalaire_prepend}>€</InputGroup.Text>
+                          </InputGroup.Prepend>
+                          <Form.Control
+                              type="number"
+                              className={styles.inputSalaire}
+                              name="money"
+                              placeholder="Votre salaire mensuel"
+                              aria-describedby="inputGroupPrepend"
+                              value={value}
+                              onChange={handleChange}
+                              required
+                          />
+                      </InputGroup>
+
+                      <MDBRow>
+                          <MDBCol>
+                              <Autocomplete
+                                  // multiple
+                                  options={departement}
+                                  getOptionLabel={(option) => option.dep_name}
+                                  onChange={(event, newValue) => {
+                                      setDep(newValue);
+                                  }}
+                                  value={dep}
+                                  renderInput={params => (
+                                      <TextField
+                                          {...params}
+                                          variant="standard"
+                                          label="Département"
+                                          placeholder="Favorites"
+                                          className={styles.field}
+                                      />
+                                  )}
                               />
-                          )}
-                      />
-                  </MDBCol>
-                  <MDBCol>
-                      <Autocomplete
-                          id="combo-box-demo"
-                          value={location}
-                          options={commune}
-                          getOptionLabel={(option) => option.nom}
-                          onChange={(event, newValue) => {
-                              setLocation(newValue);
-                          }}
-                          renderInput={(params) => (
-                                  <TextField
-                                      {...params}
-                                      variant="standard"
-                                      label="Ville"
-                                      placeholder="Favorites"
-                                      className={styles.field}
-                                  />
-                              )}
-                      />
-                  </MDBCol>
+                          </MDBCol>
+                          <MDBCol>
+                              <Autocomplete
+                                  id="combo-box-demo"
+                                  value={location}
+                                  options={commune}
+                                  getOptionLabel={(option) => option.nom}
+                                  onChange={(event, newValue) => {
+                                      setLocation(newValue);
+                                  }}
+                                  renderInput={(params) => (
+                                      <TextField
+                                          {...params}
+                                          variant="standard"
+                                          label="Ville"
+                                          placeholder="Favorites"
+                                          className={styles.field}
+                                      />
+                                  )}
+                              />
+                          </MDBCol>
 
 
-              </MDBRow>
+                      </MDBRow>
 
 
+                      <div className={styles.formulaire_button}>
+                          {!enable ?
 
+                              <Button variant="primary" type="submit" className={styles.button} disabled>
+                                  Valider
+                              </Button>
 
+                              :
+                              <Button variant="primary" type="submit" className={styles.button}>
+                                  Valider
+                              </Button>
+                          }
+                      </div>
 
+                  </Form>
 
-
-              <BOUTON />
-          </Form>
+              </div>
+          </div>
 
       </div>
 
+        <Footer />
 
-
-            <div className={styles.footer}>
-
-                <div>
-                    <Navbar>
-                        <Link href="/ankward">
-                            <Navbar.Brand href="#home" className={styles.link} style={{marginRight: "1.5em", paddingTop: "0.125rem", fontFamily: "Inter-Bold"}}>Ankward</Navbar.Brand>
-                        </Link>
-                        <Navbar.Toggle />
-
-                        <Navbar.Collapse className="justify-content-end">
-                            <Nav className="ml-auto white-text">
-                                <span className="text-muted" style={{fontFamily: "Inter-Light"}}>Ceci est une boutade</span>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Navbar>
-
-
-                </div>
-
-            </div>
-        </div>
+    </div>
   )
 }

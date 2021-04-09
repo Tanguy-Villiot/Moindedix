@@ -10,6 +10,7 @@
 .content
 {
   text-align: center;
+  margin-top: 3em;
 }
 
 .title
@@ -24,7 +25,7 @@
 {
   font-family: Inter;
   font-size: 1.2em;
-  color: #949494;
+  color: #58a8ff;
   margin-bottom: 2em;
 }
 
@@ -32,13 +33,108 @@
 {
   width: 50%;
   height: 2px;
-  background-color: gainsboro;
+  background-color: #a2a2a2;
   margin: auto;
   margin-bottom: auto;
-  margin-bottom: 6em;
+  margin-bottom: 4em;
 
 }
 
+/*STATISTIQUES*/
+
+.statistiques
+{
+  display: flex;
+  margin-bottom: 4em;
+  align-items: center;
+}
+
+.statistiques_item
+{
+  background-color: rgba(88, 168, 255, 0.3);
+  padding: 1em 2em 1em 2em;
+  margin: auto;
+  border-radius: 4px;
+  width: 20em;
+  text-align: center;
+}
+
+.statistiques_title
+{
+  font-family: Inter-Bold;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+.statistiques_stat
+{
+  text-align: center;
+  display: block;
+  font-family: Inter;
+}
+
+.buttonStats
+{
+  border: 2px solid rgba(88, 168, 255, 0.3);
+  color: rgba(88, 168, 255, 1);
+  background-color: transparent;
+  font-family: Inter;
+  transition: 0.5s all;
+}
+
+.buttonStats:hover
+{
+  color: white;
+  background-color: rgba(88, 168, 255, 0.3);
+  text-decoration: none;
+}
+
+/*EXPLAIN*/
+
+.explain
+{
+  margin-bottom: 2em;
+}
+
+.explain_titlecontent
+{
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5em;
+}
+
+.france
+{
+  height: 2.5em;
+  margin-right: 0.5em;
+}
+
+.explain_title
+{
+  font-family: Inter-Bold;
+  text-transform: uppercase;
+  margin-bottom: unset;
+}
+
+.explain_text
+{
+  font-family: Inter;
+  display: block;
+  line-height: 2em;
+  letter-spacing: 1.2px;
+}
+
+.formulaireContainer
+{
+  background: linear-gradient(90deg, rgb(147, 202, 216, 0.5) 0%, rgb(224, 216, 231, 0.5) 50%, rgb(207, 63, 59, 0.5) 100%);
+  padding: 2em;
+  border-radius: 15px;
+}
+
+.formulaire_button
+{
+
+}
 
 /*EFFECTS*/
 
@@ -147,12 +243,6 @@
 
 
 
-
-.home
-{
-
-}
-
 .label
 {
   font-family: Inter-Bold;
@@ -162,7 +252,43 @@
   width: 100%;
   margin-bottom: 2em;
   text-transform: uppercase;
+  font-size: 1.5em;
 }
+
+.inputSalaire_prepend
+{
+  background-color: transparent;
+  border-bottom: 1px solid gray;
+  border-left: 0px solid ;
+  border-right: 0px solid ;
+  border-top: 0px solid ;
+  border-radius: 0px;
+
+  position: relative;
+  z-index: 10000;
+}
+
+.inputSalaire
+{
+  border-bottom: 1px solid gray;
+  border-left: 0px solid ;
+  border-right: 0px solid ;
+  border-top: 0px solid ;
+  background-color: transparent;
+  border-radius: 0px;
+
+  -webkit-appearance: none;
+  margin: 0;
+  -moz-appearance: textfield;
+}
+
+.inputSalaire:Focus
+{
+  background-color: transparent;
+  border-bottom: 1px solid gray;
+  box-shadow: -32px 0px 0px 0px #58a8ff;
+}
+
 
 .input
 {
@@ -177,37 +303,64 @@
 
 .button
 {
-  margin-top: 1em;
-  float: right;
-  margin-top: 3em;
+  margin-top: 1.5em;
 }
-
-.footer
-{
-  color: black;
-  width: 100vw !important;
-  padding-left: 3em;
-  padding-right: 3em;
-  padding-top: 0.2em;
-  position: absolute;
-  bottom: 0;
-}
-
 
 
 /*PHONE*/
 
 @media only screen and (max-width: 600px) {
 
-
   .container
   {
-    /*min-height: auto;*/
-    padding-top: 4em;
-
+    padding-top: 3em;
     justify-content: unset;
+  }
 
+  .content
+  {
+    margin-top: unset;
+  }
 
+  .statistiques
+  {
+    display: block;
+    text-align: center;
+    margin-bottom: 3em;
+    margin-top: 1em;
+  }
+
+  .statistiques_item
+  {
+    display: none;
+  }
+
+  .buttonStats
+  {
+    color: white;
+    background-color: #007bff;
+  }
+
+  .buttonStats:hover
+  {
+    color: white;
+    background-color: rgba(0, 123, 255, 0.5);
+  }
+
+  .explain
+  {
+    margin-bottom: unset;
+  }
+
+  .label
+  {
+    font-size: 1em;
+  }
+
+  .explain_text
+  {
+    margin-bottom: 2em;
+    text-align: justify;
   }
 
   .title {
@@ -231,12 +384,6 @@
 
   .button{
     width: 100%;
-  }
-
-  .footer
-  {
-    position: relative;
-    margin-top: 3em;
   }
 
   .next
@@ -264,6 +411,26 @@
   .next
   {
     height: 13em;
+  }
+
+  .france
+  {
+    height: 2em;
+  }
+
+  .explain_title
+  {
+    font-size: 1em;
+  }
+
+  .explain_text
+  {
+    font-size: 0.7em;
+  }
+
+  .label
+  {
+    font-size: 0.8em;
   }
 
 
