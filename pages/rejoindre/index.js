@@ -64,7 +64,10 @@ export default function Index({find}){
         const region = dep.region_name;
         const money = router.query.money;
 
-        const response = await fetch("../api/addUser", {
+        const server = checkServer();
+
+
+        const response = await fetch(`${server}/api/addUser`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({nom, prenom, ville, departement, region, money, ip})
@@ -126,7 +129,7 @@ export default function Index({find}){
 
                     <>
 
-                    <h1 className={styles.title}>Diantre, il s'emblerait que vous ayez <br/>déjà apposer votre candidature</h1>
+                    <h1 className={styles.title}>Diantre, il s'emblerait que vous ayez <br/>déjà apposé votre candidature</h1>
                     <h3 className={styles.subtitle_find}>Vous pouvez toujours convenir de vous rendre sur la page statistique.</h3>
 
                     <div className={styles.statistiques_button_contain}>
