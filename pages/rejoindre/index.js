@@ -225,9 +225,11 @@ export async function getServerSideProps() {
     const server = checkServer();
 
 
-    const ip = await publicIp.v6({
-        fallbackUrls: ["https://ifconfig.co/ip"]
-    });
+    // const ip = await publicIp.v6({
+    //     fallbackUrls: ["https://ifconfig.co/ip"]
+    // });
+
+    const ip = "10001"
 
 
     const responseIp = await fetch(`${server}/api/checkIp`, {
