@@ -143,6 +143,11 @@
     margin-top: 4em;
 }
 
+.preStats_contentLast_table
+{
+
+}
+
 .preStats_content_item
 {
     margin: auto;
@@ -240,6 +245,13 @@
         line-height: 1.75em;
     }
 
+    .commun_title
+    {
+        font-size: 1em;
+        margin-top: 4em;
+        margin-bottom: unset;
+    }
+
     .category_Row
     {
         padding: unset;
@@ -251,9 +263,72 @@
         height: 100px;
     }
 
+    .category_item:Hover
+    {
+        width: 100px;
+        height: 100px;
+        background-color: rgba(0, 123, 255, 0.5);
+        margin: auto;
+        color: white;
+        border-radius: 10px;
+        position: relative;
+    }
+
+    .category_img
+    {
+        height: calc(100% - 50%);
+    }
+
+    .category_title
+    {
+        font-size: 0.4em;
+    }
+
+    .preStats_content
+    {
+        padding: unset ;
+    }
+
+    .preStats_content_item
+    {
+        /*margin-bottom: 8em;*/
+        height: unset;
+    }
+
+    .preStats_item_title
+    {
+        font-size: 1em;
+        text-align: center;
+    }
+
+    .preStats_contentLast
+    {
+        display: block;
+        margin-top: unset;
+    }
+
+    .preStats_content_item_title
+    {
+        font-size: 1em;
+    }
+
+    .preStats_contentLast_table
+    {
+        font-size: 0.8em;
+        margin-bottom: 2em;
+    }
+
+
+
+    .preStats_content_item
+    {
+        width: unset;
+    }
+
     .preStats
     {
         display: block;
+        height: unset;
     }
 
     .preStats_item
@@ -275,5 +350,10 @@
         padding-bottom: unset;
     }
 
+    .row
+    {
+        display: block;
+        margin-top: 3em;
+    }
 
 }

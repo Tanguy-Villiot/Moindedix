@@ -779,7 +779,7 @@ export default function Statistique({table, tableUser, countUser, countGueux}){
     }
 
     return(
-        <div style={{width: "100vw"}}>
+        <div>
             <NavbarSite />
             <div className="container">
 
@@ -871,7 +871,7 @@ export default function Statistique({table, tableUser, countUser, countGueux}){
                         <div className={styles.preStats_content_item}>
                             <h3 className={styles.preStats_content_item_title}>Derniers membre enregistrés</h3>
 
-                            <div className={styles.styles.preStats_contentLast_table}>
+                            <div className={styles.preStats_contentLast_table}>
 
                                 <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={lastUser} proSelect />
 
@@ -881,7 +881,7 @@ export default function Statistique({table, tableUser, countUser, countGueux}){
                         <div className={styles.preStats_content_item}>
                             <h3 className={styles.preStats_content_item_title}>Derniers moins de 10 enregistrés</h3>
 
-                            <div className={styles.styles.preStats_contentLast_table}>
+                            <div className={styles.preStats_contentLast_table}>
 
                                 <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={lastMoinsDix} proSelect />
 
@@ -901,7 +901,7 @@ export default function Statistique({table, tableUser, countUser, countGueux}){
 
                     <h3 className={styles.commun_title}>- Statistique détaillée</h3>
 
-                    <MDBRow>
+                    <MDBRow className={styles.row}>
                         <MDBCol>
                             <h3 className={styles.statistique_detaillee_search}>Trouver les gueux par ville !</h3>
 
@@ -1032,9 +1032,9 @@ export default function Statistique({table, tableUser, countUser, countGueux}){
 
                 <h1 className={styles.news}>De nouvelles statistiques arrivent tout les jours !</h1>
 
+                <Footer />
 
             </div>
-            <Footer />
         </div>
     )
 

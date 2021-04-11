@@ -1,4 +1,4 @@
-import {Nav, Navbar} from "react-bootstrap";
+import {Button, Nav, Navbar} from "react-bootstrap";
 import Link from "next/link";
 import styles from "./communaute.module.css";
 import React from "react";
@@ -54,6 +54,18 @@ export default function Index(){
                         <div className={styles.step_content}>
 
                             <span className={styles.step_text}>Faite nous honneur de votre présence sur la page statistique afin de voir l'ampleur du mouvement.</span>
+
+                            <div className={styles.statistiques_button_contain}>
+
+                                <div className={styles.statistiques_button}>
+                                    <Link href="/statistique">
+                                        <Button variant="link" className={styles.buttonStats}>
+                                            Voir toutes les statistiques
+                                        </Button>
+                                    </Link>
+                                </div>
+
+                            </div>
 
                         </div>
 

@@ -11,8 +11,8 @@ export default function Footer(){
 
             <div>
 
-                    <Link href="/ankward">
-                        <span href="/ankward" className={styles.link} style={{marginRight: "1.5em", paddingTop: "0.125rem", fontFamily: "Inter-Bold"}}>Ankward</span>
+                    <Link href="/contact">
+                        <span href="/contact" className={styles.link} style={{paddingTop: "0.125rem", fontFamily: "Inter-Bold"}}>Nous contacter</span>
                     </Link>
 
             </div>

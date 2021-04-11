@@ -26,7 +26,7 @@ export default function Ankward(){
 
             <div className={"p-5 " + styles.content}>
 
-                <h3 className={styles.text}>Instagram <a href="https://www.instagram.com/ankward.fr/" target="_blank"><span style={{fontFamily: "Inter-Bold"}}>@Ankward.fr</span></a></h3>
+                <h3 className={styles.text}>Instagram <a href="https://www.instagram.com/ankward.fr/contact" target="_blank"><span style={{fontFamily: "Inter-Bold"}}>@Ankward.fr</span></a></h3>
                 <h3 className={styles.text}>Email <a href="mailto: creation@ankward.fr" target="_blank"><span style={{fontFamily: "Inter-Bold"}}>creation@ankward.fr</span></a></h3>
 
             </div>

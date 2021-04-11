@@ -102,8 +102,7 @@
 @media only screen and (max-width: 600px) {
     .main {
         background-size: cover;
-        background-position-y: 0px;
-        background-position-x: -515px;
+        background-position: center;
     }
 
     .button

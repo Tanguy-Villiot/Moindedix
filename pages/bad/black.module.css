@@ -169,7 +169,30 @@
 
     .title{
         font-size: 1em;
+        line-height: 1.5em;
 
+    }
+
+    .also
+    {
+        display: block;
+    }
+
+    .statistiques_button_contain
+    {
+        margin-left: unset;
+        text-align: center;
+        margin-top: 1em;
+    }
+
+    .statistiques_button
+    {
+        float: unset;
+    }
+
+    .also_title
+    {
+        font-size: 1em;
     }
 
     .search{

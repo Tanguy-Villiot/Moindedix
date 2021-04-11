@@ -26,7 +26,7 @@
 {
     display: flex;
     align-items: center;
-    margin-bottom: 2em;
+    margin-bottom: 4em;
 }
 
 .step_nbr
@@ -69,6 +69,36 @@
 {
     height: 2em;
     margin-right: 0.5em;
+}
+
+.statistiques_button_contain
+{
+
+}
+
+.statistiques_button
+{
+    margin-top: 2em;
+}
+
+
+.buttonStats
+{
+    color: white;
+    background-color: black;
+    font-family: Inter;
+    border-radius: 8px;
+    transition: 0.5s all;
+
+    font-size: 1em;
+}
+
+.buttonStats:hover
+{
+    transform: scale(0.9);
+    color: white;
+    /*background-color: rgba(88, 168, 255, 0.3);*/
+    text-decoration: none;
 }
 
 .subtitle
@@ -162,5 +192,55 @@
         top: -100%;
         opacity: 0;
 
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .title
+    {
+        text-align: center;
+        font-size: 1.5em;
+    }
+
+    .step
+    {
+        height: 75px;
+        width: 75px;
+    }
+
+    .content
+    {
+        width: unset;
+    }
+
+    .step_content
+    {
+        width: 10em;
+    }
+
+    .step_text
+    {
+        font-size: 0.7em;
+    }
+
+    .step_nbr
+    {
+        font-size: 4em;
+    }
+
+    .imgReseaux
+    {
+        height: 2em;
+    }
+
+    .reseaux
+    {
+        font-size: 0.7em;
+    }
+
+    .buttonStats
+    {
+        font-size: 0.6em;
     }
 }

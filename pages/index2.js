@@ -670,6 +670,8 @@ export default function Home() {
 
         setShow(false)
 
+        localStorage["alreadyVisited"] = true;
+
     }
 
 
@@ -683,7 +685,6 @@ export default function Home() {
                 setShow(false)
             } else {
                 //this is the first time
-                localStorage["alreadyVisited"] = true;
                 setShow(true)
             }
 
