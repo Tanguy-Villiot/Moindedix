@@ -1,7 +1,7 @@
 .main
 {
     min-height: 100vh;
-    background-image: url('../../public/getout.png');
+    background-image: url('../../public/getout1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -27,7 +27,7 @@
 
 
 
-.button
+.content
 {
     position: fixed;
     left: 50%;
@@ -38,16 +38,51 @@
     padding: 1em;
 
 
-    background: rgba(255,255,255,0.4);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.2);
+    /*background: rgba(255,255,255,0.4);*/
+    /*backdrop-filter: blur(10px);*/
+    /*border-radius: 10px;*/
+    /*border: 1px solid rgba(255,255,255,0.2);*/
 
+    /*opacity: 0;*/
+    /*animation: button ease 1s;*/
+    /*-webkit-animation: button ease 1s;*/
+    /*animation-fill-mode: forwards;*/
+    /*animation-delay: 2s;*/
+}
+
+.title
+{
+    font-family: Inter-Bold;
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+    color: white;
+
+    opacity: 0;
+    animation: title ease 1s;
+    -webkit-animation: title ease 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+}
+
+@keyframes title {
+    from {
+        opacity: 0;
+
+    }
+
+    to {
+        opacity: 1;
+
+    }
+}
+
+.button
+{
     opacity: 0;
     animation: button ease 1s;
     -webkit-animation: button ease 1s;
     animation-fill-mode: forwards;
-    animation-delay: 2s;
+    animation-delay: 2.5s;
 }
 
 @keyframes button {
@@ -61,15 +96,6 @@
 
     }
 }
-
-.title
-{
-    font-family: Inter-Bold;
-    text-transform: uppercase;
-    margin-bottom: 0.5em;
-    color: white;
-}
-
 
 /*PHONE*/
 

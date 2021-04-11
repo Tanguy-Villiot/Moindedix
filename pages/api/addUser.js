@@ -19,6 +19,7 @@ handler.post(async (req, res) => {
 
         nom: data.nom,
         prenom: data.prenom,
+        ville: data.ville,
         departement: data.departement,
         region: data.region,
         money: data.money,

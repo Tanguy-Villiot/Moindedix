@@ -1,24 +1,75 @@
 .title
 {
     font-family: Inter-Bold;
-    text-align: center;
     text-transform: uppercase;
-    font-size: 1.5em;
+    font-size: 2em;
     margin-top: 3em;
     margin-bottom: 1.5em;
 }
 
-.bar
+.content
 {
-    width: 50%;
-    height: 2px;
-    background-color: gainsboro;
+    width: 50em;
     margin: auto;
-    margin-bottom: auto;
-    margin-bottom: 2em;
-
 }
 
+.step
+{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-color: #def0fc;
+    position: relative;
+}
+
+.step_contains
+{
+    display: flex;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.step_nbr
+{
+    font-family: Inter-Bold,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 6em;
+    color: white;
+    float: right;
+    position: relative;
+    top: -5px;
+    right: 10px;
+}
+
+.step_content
+{
+    margin-left: 3em;
+    width: 30em;
+}
+
+.step_text
+{
+    font-family: Inter-Light,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    letter-spacing: 1px;
+}
+
+.reseaux
+{
+    display: block;
+    margin-bottom: 0.25em;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    color: #007bff;
+}
+
+.reseaux:Hover
+{
+    cursor: pointer;
+}
+
+.imgReseaux
+{
+    height: 2em;
+    margin-right: 0.5em;
+}
 
 .subtitle
 {
@@ -26,6 +77,13 @@
     font-family: Inter;
     font-size: 1.5em;
     margin-top: 2em;
+}
+
+.asterix
+{
+    font-family: Inter-Light,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    margin-top: 1em;
+    display: block;
 }
 
 
@@ -48,6 +106,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 1000000;
     /*-webkit-animation-duration: .5s;*/
     /*animation-duration: .5s;*/
     /*-webkit-animation-name: competition_curtain__1fPAH;*/
@@ -63,7 +122,7 @@
     animation: curtain ease 1.2s;
     -webkit-animation: curtain ease 1.2s;
     animation-fill-mode: forwards;
-    animation-delay: 6s;
+    animation-delay: 10s;
 
     /*animation-timing-function: ease-in-out;*/
 }

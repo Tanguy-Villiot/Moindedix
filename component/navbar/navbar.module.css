@@ -1,6 +1,31 @@
+.navbar
+{
+    padding-right: 2em;
+    padding-left: 2em;
+    width: 100vw;
+}
+
 .linkToHome
 {
     margin-right: 1.5em;
-    padding-top: 0.125rem;
     font-family: "Inter-Bold";
 }
+
+
+@media only screen and (max-width: 600px) {
+
+    .linkToHome
+    {
+        margin: auto;
+        font-size: 0.7em;
+    }
+
+    .link
+    {
+        font-size: 0.7em;
+    }
+
+
+
+}
+

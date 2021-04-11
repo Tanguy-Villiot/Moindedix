@@ -558,7 +558,7 @@ export default function Home() {
             if (response.ok) {
                 console.log("ça marche !");
 
-                return router.push("/black");
+                return router.push("/bad");
             }
 
 

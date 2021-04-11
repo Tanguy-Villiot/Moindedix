@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
-import {Button, Form, InputGroup, Nav, Navbar} from "react-bootstrap";
+import {Button, Form, InputGroup, Modal, Nav, Navbar} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -531,6 +531,8 @@ export default function Home() {
 
     const [enable, setEnable] = useState(false);
 
+    const [show, setShow] = useState(false);
+
 
     //FETCH METHODS
 
@@ -612,7 +614,7 @@ export default function Home() {
                     console.log("ça marche !");
 
                     router.push({
-                        pathname: '/black',
+                        pathname: '/bad',
                         query: { keyword: 'paysan' },
                     })
                 }
@@ -630,7 +632,10 @@ export default function Home() {
                 if (response.ok) {
                     console.log("ça marche !");
 
-                    return router.push("/black");
+                    router.push({
+                        pathname: '/bad',
+                        query: { keyword: 'gueux' },
+                    })
                 }
 
             }
@@ -661,8 +666,26 @@ export default function Home() {
 
 
 
+    function handleHide(){
+
+        setShow(false)
+
+    }
+
 
     useEffect(() =>{
+
+        //MODAL FIRST VISIT
+
+
+            let visited = localStorage["alreadyVisited"];
+            if(visited) {
+                setShow(false)
+            } else {
+                //this is the first time
+                localStorage["alreadyVisited"] = true;
+                setShow(true)
+            }
 
 
 
@@ -706,6 +729,28 @@ export default function Home() {
     return (
     <div className={styles.container}>
 
+
+        <Modal show={show} onHide={handleHide}>
+            <Modal.Header closeButton>
+                <Modal.Title className={styles.modal_title}>Information pour les prolétaires</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <span className={styles.modal}>
+                    Cette place virtuelle se trouve être <strong>humoristique</strong>. Tout est factices et toutes les informations que vous pouvez remplir peuvent être <strong>fictives</strong>.<br/>
+                    <br/>
+
+                    Nous ne sommes d'ailleurs <strong>affiliés en aucune manière</strong> à Louis Vignac, père de François Vignac, présent sur le sol français depuis 13 générations.
+                </span>
+
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="primary" onClick={handleHide}>
+                    J'acquiesce
+                </Button>
+            </Modal.Footer>
+        </Modal>
+
+
         <div className={styles.wrap}>
             <div className={styles.meta}></div>
             <div className={styles.meta}></div>
@@ -728,47 +773,44 @@ export default function Home() {
 
           <div className={styles.statistiques}>
 
+
               <div className={styles.statistiques_item}>
 
-                  <h3 className={styles.statistiques_title}>Membres de la coalition</h3>
-
-                  <span className={styles.statistiques_stat}>
-
-                      {/*{countUser === undefined ?*/}
-
-                      {/*    <p>Loading</p>*/}
-
-                      {/*:*/}
-
-                          {countUser}
-
-
-                      {/*}*/}
-
-
-                  </span>
+                  <h3 className={styles.statistiques_explain}>Des chiffres qui parle pour nous</h3>
 
               </div>
 
-              <div className={styles.statistiques_itemButton}>
+              <div className={styles.statistiques_item}>
 
+                  <span className={styles.statistiques_stat}>{countUser}+</span>
+
+                      <h3 className={styles.statistiques_title}>Membres du parti</h3>
+
+              </div>
+
+
+              <div className={styles.statistiques_item}>
+
+                  <span className={styles.statistiques_stat}>{countGueux}+</span>
+
+
+                  <h3 className={styles.statistiques_title}>Moins de 10 repéré</h3>
+
+              </div>
+
+          </div>
+
+          <div className={styles.statistiques_button_contain}>
+
+              <div className={styles.statistiques_button}>
                   <Link href="/statistique">
                       <Button variant="link" className={styles.buttonStats}>
                           Voir toutes les statistiques
                       </Button>
                   </Link>
-
-
               </div>
 
-              <div className={styles.statistiques_item}>
 
-                  <h3 className={styles.statistiques_title}>Moins de 10 repéré</h3>
-
-                  <span className={styles.statistiques_stat}>{countGueux}</span>
-
-
-              </div>
 
           </div>
 
@@ -854,21 +896,28 @@ export default function Home() {
 
 
                       </MDBRow>
+                      <MDBRow end>
+                          <div>
+                              {!enable ?
+
+                                  <div className={styles.formulaire_button}>
+                                      <Button variant="primary" type="submit" className={styles.button} disabled>
+                                          Valider
+                                      </Button>
+                                  </div>
+
+                                  :
+                                  <div className={styles.formulaire_button}>
+                                      <Button variant="primary" type="submit" className={styles.button}>
+                                          Valider
+                                      </Button>
+                                  </div>
+                              }
+                          </div>
+                      </MDBRow>
 
 
-                      <div className={styles.formulaire_button}>
-                          {!enable ?
 
-                              <Button variant="primary" type="submit" className={styles.button} disabled>
-                                  Valider
-                              </Button>
-
-                              :
-                              <Button variant="primary" type="submit" className={styles.button}>
-                                  Valider
-                              </Button>
-                          }
-                      </div>
 
                   </Form>
 

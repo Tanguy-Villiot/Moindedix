@@ -18,50 +18,159 @@
     color: #007bff;
 }
 
+
+/*Category*/
+.category
+{
+
+}
+
+.category_Row
+{
+    display: flex;
+    /*width: 29em;*/
+    margin: auto;
+    margin-bottom: 2em;
+    padding: 10em;
+    padding-top: 2em;
+    padding-bottom: 5em;
+}
+
+.category_item
+{
+    width: 200px;
+    height: 200px;
+    background-color: rgba(0, 123, 255, 0.2);
+
+    margin: auto;
+    border-radius: 10px;
+    position: relative;
+
+    transition: 0.3s;
+}
+
+.category_item:Hover
+{
+    width: 200px;
+    height: 200px;
+    background-color: rgba(0, 123, 255, 0.5);
+    margin: auto;
+    color: white;
+    border-radius: 10px;
+    position: relative;
+}
+
+.category_containerTitle
+{
+    position: relative;
+    margin-top: 1em;
+}
+
+.category_title
+{
+    font-family: Inter-Bold;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.category_img
+{
+    height: 8em;
+    margin: auto;
+    margin-top: auto;
+    display: block;
+    font-size: 1em;
+    opacity: 0.1;
+    margin-top: 1em;
+
+    transition: 0.3s;
+}
+
+.category_item:Hover .category_img
+{
+    opacity: 1;
+}
+
+
+/*COMMUN*/
+
+.commun_title
+{
+    font-family: Inter-Bold;
+    text-transform: uppercase;
+    margin-bottom: 2em;
+}
+
 /*PreStats*/
 .preStats
 {
-    display: flex;
     margin-bottom: 4em;
+    height: 56em;
+}
+
+.preStats_content
+{
+    display: flex;
+    padding: 0em 10em 0em 10em;
 }
 
 .preStats_item
 {
-    background-color: rgba(88, 168, 255, 0.3);
-    padding: 1em 2em 1em 2em;
+    padding: 2em;
     margin: auto;
-    border-radius: 4px;
-    width: 20em;
-    text-align: center;
 }
 
-.preStats_title
+.preStats_item_title
 {
-    font-family: Inter-Bold;
-    text-transform: uppercase;
-    font-size: 1em;
+    font-family: Inter;
+    font-size: 1.5em;
 }
+
 
 .preStats_stat
 {
     text-align: center;
     display: block;
+    font-family: Inter-Bold;
+    font-size: 3em;
+    color: #bd93d8;
+}
+
+.preStats_contentLast
+{
+    display: flex;
+    margin-top: 4em;
+}
+
+.preStats_content_item
+{
+    margin: auto;
+    height: 27em;
+    width: 45%;
+
+}
+
+.preStats_content_item_title
+{
     font-family: Inter;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 2em;
 }
 
-.accordion
+.styles.styles.preStats_contentLast_table
 {
-    margin-top: 2em;
+    padding: 2em;
 }
 
-.Accordion_img
+
+/*STATISTIQUE DETAILLEE*/
+.statistique_detaillee
 {
-    height: 1em;
-    margin-right: 1em;
+
 }
-
-
-/*MOINS DE DIX*/
 
 .Moinsdedix
 {
@@ -75,11 +184,11 @@
 }
 
 
-.search
+.statistique_detaillee_search
 {
     font-size: 1em;
     font-family: Inter;
-    margin-top: 4em;
+    margin-top: 2em;
     margin-bottom: 2em;
     text-transform: uppercase;
     color: #dd2d2d;
@@ -103,11 +212,68 @@
     font-family: Inter;
 }
 
+/*MOINS DE DIX*/
+
+
+
 .news
 {
     font-family: Inter-Bold;
     text-align: center;
     text-transform: uppercase;
-    font-size: 1.5em;
+    font-size: 2em;
     padding: 2em;
+    margin-top: 2em;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .title
+    {
+        font-size: 1em;
+        margin-top: 1em;
+    }
+
+    .subtitle
+    {
+        font-size: 0.7em;
+        line-height: 1.75em;
+    }
+
+    .category_Row
+    {
+        padding: unset;
+    }
+
+    .category_item
+    {
+        width: 100px;
+        height: 100px;
+    }
+
+    .preStats
+    {
+        display: block;
+    }
+
+    .preStats_item
+    {
+        margin: auto;
+        margin-bottom: 2em;
+        border-radius: 4px;
+    }
+
+    .preStats_title
+    {
+        font-size: 0.8em;
+    }
+
+    .news
+    {
+        font-size: 1.20em;
+        margin-top: 1.5em;
+        padding-bottom: unset;
+    }
+
+
 }

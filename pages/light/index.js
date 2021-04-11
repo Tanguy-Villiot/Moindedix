@@ -51,11 +51,11 @@ export default function Light(){
             return (
                 <div className={styles.main}>
 
-                    <div className={styles.button}>
+                    <div className={styles.content}>
 
-                        <h3 className={styles.title}>Vous faites parti de notre caste !</h3>
+                        <h3 className={styles.title}>Vous êtes éligible !</h3>
 
-                        <Button variant="primary" style={{border: '1px solid grey'}} onClick={handleClick}>
+                        <Button variant="primary" className={styles.button} onClick={handleClick}>
                             Rejoindre la communauté
                         </Button>
                     </div>
