@@ -824,7 +824,7 @@ export default function Statistique(){
     }
 
     return(
-        <div>
+        <div className={styles.appli}>
 
             {loading ?
 
@@ -961,7 +961,7 @@ export default function Statistique(){
 
                             <MDBRow className={styles.row}>
                                 <MDBCol>
-                                    <h3 className={styles.statistique_detaillee_search}>Trouver les gueux par ville !</h3>
+                                    <h3 className={styles.statistique_detaillee_search}>Trouvez les gueux par ville !</h3>
 
                                     <Form onSubmit={handleClickVille}>
                                         <MDBRow>
@@ -985,7 +985,7 @@ export default function Statistique(){
                                     </Form>
                                 </MDBCol>
                                 <MDBCol>
-                                    <h3 className={styles.statistique_detaillee_search} style={{color: "#ddb12d"}}>Trouver les gueux par région !</h3>
+                                    <h3 className={styles.statistique_detaillee_search} style={{color: "#ddb12d"}}>Trouvez les gueux par région !</h3>
 
                                     <Form onSubmit={handleClickRegion}>
                                         <MDBRow>
@@ -1016,7 +1016,7 @@ export default function Statistique(){
                                 </MDBCol>
 
                                 <MDBCol>
-                                    <h3 className={styles.statistique_detaillee_search} style={{color: "#5cdd2d"}}>Trouver les gueux par département !</h3>
+                                    <h3 className={styles.statistique_detaillee_search} style={{color: "#5cdd2d"}}>Trouvez les gueux par département !</h3>
 
 
                                     <Form onSubmit={handleClickDepartement}>

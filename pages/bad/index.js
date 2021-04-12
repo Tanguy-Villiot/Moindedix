@@ -37,7 +37,7 @@ export default function Black() {
     );
 
     return (
-        <>
+        <div className={styles.appli}>
             <NavbarSite />
 
             {loading ?
@@ -236,7 +236,7 @@ export default function Black() {
 
 
 
-        </>
+        </div>
 
 
     )

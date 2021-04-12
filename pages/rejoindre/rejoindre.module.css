@@ -1,3 +1,12 @@
+.appli
+{
+    position: relative;
+    min-height: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-bottom: 5em;
+}
+
 .linkToHome
 {
     margin-right: 1.5em;

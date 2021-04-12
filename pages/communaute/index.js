@@ -51,7 +51,7 @@ export default function Index(){
 
                         <div className={styles.step_content}>
 
-                            <span className={styles.step_text}>Faite nous honneur de votre présence sur la page statistique afin de voir l'ampleur du mouvement.</span>
+                            <span className={styles.step_text}>Faites nous honneur de votre présence sur la page statistiques afin de voir l'ampleur du mouvement.</span>
 
                             <div className={styles.statistiques_button_contain}>
 
@@ -76,7 +76,7 @@ export default function Index(){
 
                         <div className={styles.step_content}>
 
-                            <span className={styles.step_text}>Réunissez-vous entre entre personne de même caste et organiser des battus afin de bouter les moins de <span style={{color: "#dd2d2d"}}>10</span> à venir sur le site.</span>
+                            <span className={styles.step_text}>Réunissez-vous entre entre personnes de même caste et organiser des battus afin de bouter les moins de <span style={{color: "#dd2d2d"}}>10</span> à venir sur le site.</span>
 
                         </div>
 

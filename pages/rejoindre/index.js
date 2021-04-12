@@ -130,7 +130,7 @@ export default function Index(){
 
     return(
 
-        <div>
+        <div className={styles.appli}>
 
             {loading ?
 

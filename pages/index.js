@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import {Button, Form, InputGroup, Modal, Nav, Navbar} from "react-bootstrap";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {TextField} from "@material-ui/core";
@@ -547,7 +547,7 @@ export default function Home() {
         }
     ];
 
-    const [value, setValue] = useState();
+    const [value, setValue] = useState(100);
 
     const [countUser, setCountUser] = useState(undefined);
     const [countGueux, setCountGueux] = useState(undefined);
@@ -770,14 +770,15 @@ export default function Home() {
     // console.log(countUser);
 
     return (
-    <div className={styles.container}>
+        <div className={styles.appli}>
+            <div className={styles.container}>
 
 
-        <Modal show={show} onHide={handleHide}>
-            <Modal.Header closeButton>
-                <Modal.Title className={styles.modal_title}>Information pour les prolétaires</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+                <Modal show={show} onHide={handleHide}>
+                    <Modal.Header closeButton>
+                        <Modal.Title className={styles.modal_title}>Information pour les prolétaires</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                 <span className={styles.modal}>
                     Cette place virtuelle se trouve être <strong>humoristique</strong>. Tout est factices et toutes les informations que vous pouvez remplir peuvent être <strong>fictives</strong>.<br/>
                     <br/>
@@ -785,192 +786,197 @@ export default function Home() {
                     Nous ne sommes d'ailleurs <strong>affiliés en aucune manière</strong> à Louis Vignac, père de François Vignac, présent sur le sol français depuis 13 générations.
                 </span>
 
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="primary" onClick={handleHide}>
-                    J'acquiesce
-                </Button>
-            </Modal.Footer>
-        </Modal>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleHide}>
+                            J'acquiesce
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
 
 
-        <div className={styles.wrap}>
-            <div className={styles.meta}></div>
-            <div className={styles.meta}></div>
-        </div>
+                <div className={styles.wrap}>
+                    <div className={styles.meta}></div>
+                    <div className={styles.meta}></div>
+                </div>
 
 
 
 
-        <div className={styles.content}>
-            <h1 className={styles.title}>#Antimoinsde<span style={{color: "#dd2d2d"}}>10</span></h1>
-            <h3 className={styles.subtitle}>Redorons de prestiges nos villes Françaises !</h3>
-            <div className={styles.bar}>
+                <div className={styles.content}>
+                    <h1 className={styles.title}>#Antimoinsde<span style={{color: "#dd2d2d"}}>10</span></h1>
+                    <h3 className={styles.subtitle}>Redorons de prestiges nos villes Françaises !</h3>
+                    <div className={styles.bar}>
+                    </div>
+
+                </div>
+
+
+                <div className={"container " + styles.home}>
+
+
+                    <div className={styles.statistiques}>
+
+
+                        <div className={styles.statistiques_item}>
+
+                            <h3 className={styles.statistiques_explain}>Des chiffres qui parle pour nous</h3>
+
+                        </div>
+
+                        <div className={styles.statistiques_item}>
+
+                            <span className={styles.statistiques_stat}>{countUser}+</span>
+
+                            <h3 className={styles.statistiques_title}>Membres du parti</h3>
+
+                        </div>
+
+
+                        <div className={styles.statistiques_item}>
+
+                            <span className={styles.statistiques_stat}>{countGueux}+</span>
+
+
+                            <h3 className={styles.statistiques_title}>Moins de 10 repéré</h3>
+
+                        </div>
+
+                    </div>
+
+                    <div className={styles.statistiques_button_contain}>
+
+                        <div className={styles.statistiques_button}>
+                            <Link href="/statistique">
+                                <Button variant="link" className={styles.buttonStats}>
+                                    Voir toutes les statistiques
+                                </Button>
+                            </Link>
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                    <div className={styles.explain}>
+
+                        <div className={styles.explain_titlecontent}>
+                            <img src="/france.svg" className={styles.france} alt="france"/>
+                            <h3 className={styles.explain_title}>Qui sommes-nous ?</h3>
+
+                        </div>
+                        <span className={styles.explain_text}>AntiMoinsDe<span style={{color: "#dd2d2d"}}>10</span> est un parti politique créé en 2020 par une coalition de personnes bien nées Parisiennes.</span>
+                        <span className={styles.explain_text}>Nous avons pour vocation à mettre dehors de nos villes françaises, jadis exemples de pureté et d'élégance, les personnes gagnant moins de 10.000euros par mois.</span><br/>
+
+                    </div>
+
+
+                    <div className={styles.formulaireContainer}>
+
+                        <div className={styles.formulaire}>
+                            <Form onSubmit={handleSubmit}>
+                                <Form.Label className={styles.label}>Rejoignez la communauté, tester votre éligibilité</Form.Label>
+                                <label htmlFor="salaire" className={styles.labelSalaire}>Votre salaire</label>
+                                <InputGroup hasValidation className={styles.input}>
+                                    <Form.Control
+                                        id="salaire"
+                                        type="number"
+                                        className={styles.inputSalaire}
+                                        name="money"
+                                        placeholder="Votre salaire mensuel"
+                                        aria-describedby="inputGroupPrepend"
+                                        value={value}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                    <InputGroup.Append>
+                                        <InputGroup.Text id="inputGroupPrepend" className={styles.inputSalaire_prepend}>€</InputGroup.Text>
+                                    </InputGroup.Append>
+                                </InputGroup>
+
+                                <MDBRow>
+                                    <MDBCol>
+                                        <Autocomplete
+                                            // multiple
+                                            options={departement}
+                                            getOptionLabel={(option) => option.dep_name}
+                                            onChange={(event, newValue) => {
+                                                setDep(newValue);
+                                            }}
+                                            value={dep}
+                                            renderInput={params => (
+                                                <TextField
+                                                    {...params}
+                                                    variant="standard"
+                                                    label="Département"
+                                                    placeholder="Favorites"
+                                                    className={styles.field}
+                                                />
+                                            )}
+                                        />
+                                    </MDBCol>
+                                    <MDBCol>
+                                        <Autocomplete
+                                            id="combo-box-demo"
+                                            value={location}
+                                            options={commune}
+                                            getOptionLabel={(option) => option.nom}
+                                            onChange={(event, newValue) => {
+                                                setLocation(newValue);
+                                            }}
+                                            renderInput={(params) => (
+                                                <TextField
+                                                    {...params}
+                                                    variant="standard"
+                                                    label="Ville"
+                                                    placeholder="Favorites"
+                                                    className={styles.field}
+                                                />
+                                            )}
+                                        />
+                                    </MDBCol>
+
+
+                                </MDBRow>
+                                <MDBRow end>
+                                    <div>
+                                        {!enable ?
+
+                                            <div className={styles.formulaire_button}>
+                                                <Button variant="primary" type="submit" className={styles.button} disabled>
+                                                    Valider
+                                                </Button>
+                                            </div>
+
+                                            :
+                                            <div className={styles.formulaire_button}>
+                                                <Button variant="primary" type="submit" className={styles.button}>
+                                                    Valider
+                                                </Button>
+                                            </div>
+                                        }
+                                    </div>
+                                </MDBRow>
+
+
+
+
+                            </Form>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
             </div>
 
+            <Footer />
+
         </div>
-
-
-      <div className={"container " + styles.home}>
-
-
-          <div className={styles.statistiques}>
-
-
-              <div className={styles.statistiques_item}>
-
-                  <h3 className={styles.statistiques_explain}>Des chiffres qui parle pour nous</h3>
-
-              </div>
-
-              <div className={styles.statistiques_item}>
-
-                  <span className={styles.statistiques_stat}>{countUser}+</span>
-
-                      <h3 className={styles.statistiques_title}>Membres du parti</h3>
-
-              </div>
-
-
-              <div className={styles.statistiques_item}>
-
-                  <span className={styles.statistiques_stat}>{countGueux}+</span>
-
-
-                  <h3 className={styles.statistiques_title}>Moins de 10 repéré</h3>
-
-              </div>
-
-          </div>
-
-          <div className={styles.statistiques_button_contain}>
-
-              <div className={styles.statistiques_button}>
-                  <Link href="/statistique">
-                      <Button variant="link" className={styles.buttonStats}>
-                          Voir toutes les statistiques
-                      </Button>
-                  </Link>
-              </div>
-
-
-
-          </div>
-
-
-
-
-
-          <div className={styles.explain}>
-
-              <div className={styles.explain_titlecontent}>
-                  <img src="/france.svg" className={styles.france} alt="france"/>
-                  <h3 className={styles.explain_title}>Qui sommes-nous ?</h3>
-
-              </div>
-              <span className={styles.explain_text}>AntiMoinsDe<span style={{color: "#dd2d2d"}}>10</span> est un parti politique créé en 2020 par une coalition de personne bien née Parisienne.</span>
-              <span className={styles.explain_text}>Nous avons pour vocation à mettre dehors de nos villes françaises, jadis exemple de pureté et d'élégance, les personnes gagnant moins de 10.000euros par mois.</span><br/>
-
-          </div>
-
-
-          <div className={styles.formulaireContainer}>
-
-              <div className={styles.formulaire}>
-                  <Form onSubmit={handleSubmit}>
-                      <Form.Label className={styles.label}>Rejoignez la communauté, tester votre éligibilité</Form.Label>
-                      <InputGroup hasValidation className={styles.input}>
-                          <InputGroup.Prepend>
-                              <InputGroup.Text id="inputGroupPrepend" className={styles.inputSalaire_prepend}>€</InputGroup.Text>
-                          </InputGroup.Prepend>
-                          <Form.Control
-                              type="number"
-                              className={styles.inputSalaire}
-                              name="money"
-                              placeholder="Votre salaire mensuel"
-                              aria-describedby="inputGroupPrepend"
-                              value={value}
-                              onChange={handleChange}
-                              required
-                          />
-                      </InputGroup>
-
-                      <MDBRow>
-                          <MDBCol>
-                              <Autocomplete
-                                  // multiple
-                                  options={departement}
-                                  getOptionLabel={(option) => option.dep_name}
-                                  onChange={(event, newValue) => {
-                                      setDep(newValue);
-                                  }}
-                                  value={dep}
-                                  renderInput={params => (
-                                      <TextField
-                                          {...params}
-                                          variant="standard"
-                                          label="Département"
-                                          placeholder="Favorites"
-                                          className={styles.field}
-                                      />
-                                  )}
-                              />
-                          </MDBCol>
-                          <MDBCol>
-                              <Autocomplete
-                                  id="combo-box-demo"
-                                  value={location}
-                                  options={commune}
-                                  getOptionLabel={(option) => option.nom}
-                                  onChange={(event, newValue) => {
-                                      setLocation(newValue);
-                                  }}
-                                  renderInput={(params) => (
-                                      <TextField
-                                          {...params}
-                                          variant="standard"
-                                          label="Ville"
-                                          placeholder="Favorites"
-                                          className={styles.field}
-                                      />
-                                  )}
-                              />
-                          </MDBCol>
-
-
-                      </MDBRow>
-                      <MDBRow end>
-                          <div>
-                              {!enable ?
-
-                                  <div className={styles.formulaire_button}>
-                                      <Button variant="primary" type="submit" className={styles.button} disabled>
-                                          Valider
-                                      </Button>
-                                  </div>
-
-                                  :
-                                  <div className={styles.formulaire_button}>
-                                      <Button variant="primary" type="submit" className={styles.button}>
-                                          Valider
-                                      </Button>
-                                  </div>
-                              }
-                          </div>
-                      </MDBRow>
-
-
-
-
-                  </Form>
-
-              </div>
-          </div>
-
-      </div>
-
-        <Footer />
-
-    </div>
   )
 }
