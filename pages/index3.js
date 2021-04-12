@@ -1,39 +1,11 @@
 import styles from '../styles/Home.module.css'
-import Link from 'next/link'
-import {Button, Form, InputGroup, Modal, Nav, Navbar} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import {TextField} from "@material-ui/core";
-import {MDBCol, MDBRow} from "mdbreact";
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
 import Footer from "../component/footer/footer";
-import checkServer from "../component/checkServer";
-import publicIp from "public-ip";
-
-const server = checkServer();
-
-
-export async function checkIp(){
-
-    const server = checkServer();
-
-
-    const ip = await publicIp.v6({
-        fallbackUrls: ["https://ifconfig.co/ip"]
-    });
-
-    const responseIp = await fetch(`${server}/api/checkIpGueux`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ip})
-    });
-
-    const find = await responseIp.json();
-
-    return find.length > 0;
-
-}
-
+import Head from 'next/head'
 
 export default function Home() {
 
@@ -549,43 +521,11 @@ export default function Home() {
 
     const [value, setValue] = useState();
 
-    const [countUser, setCountUser] = useState(undefined);
-    const [countGueux, setCountGueux] = useState(undefined);
     const [dep, setDep] = useState(departement[0])
     const [commune, setCommune] = useState(undefined);
-    const [location, setLocation] = useState(null);
-
-    const [enable, setEnable] = useState(false);
-
-    const [show, setShow] = useState(false);
+    const [location, setLocation] = useState(undefined);
 
 
-    //FETCH METHODS
-
-    async function getUser() {
-        const server = checkServer();
-
-        const res1 = await fetch(`${server}/api/getCountUser`, {
-            method: "GET",
-            headers: {"Content-Type": "application/json"}
-        });
-
-        return await res1.json()
-
-    }
-
-    async function getGueux() {
-
-        const server = checkServer();
-
-        const res2 = await fetch(`${server}/api/getCountGueux`, {
-            method: "GET",
-            headers: {"Content-Type": "application/json"}
-        });
-
-        return await res2.json()
-
-    }
 
 
     function handleChange(evt){
@@ -595,16 +535,6 @@ export default function Home() {
         setValue(val);
 
 
-        if(value != null && value != undefined && dep != null && dep != undefined && location != null && location != undefined)
-        {
-            setEnable(true);
-        }
-        else
-        {
-            setEnable(false)
-        }
-
-
 
     }
 
@@ -612,75 +542,24 @@ export default function Home() {
 
         e.preventDefault()
 
-        console.log(location.population);
-
+        console.log(value);
 
         if (value > 10000) {
 
-            return router.push({
-                pathname: '/light',
-                query: {
-                    money: value,
-                    departement: JSON.stringify(dep),
-                    ville: location.nom
-                },
-            })
+            return router.push("/light");
         } else {
 
-
-            const ip = await publicIp.v6({
-                fallbackUrls: ["https://ifconfig.co/ip"]
+            const response = await fetch("../api/addMoindix", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({adress, value})
             });
 
-            checkIp()
-                .then(async res => {
+            if (response.ok) {
+                console.log("ça marche !");
 
-                    if (res) {
-                        router.push({
-                            pathname: '/bad',
-                            query: {keyword: 'renegat'},
-                        })
-                    } else {
-                        if (location.population < 60000) {
-
-                            const response = await fetch(`${server}/api/addMoindix`, {
-                                method: "POST",
-                                headers: {"Content-Type": "application/json"},
-                                body: JSON.stringify({value, location, dep, ip})
-                            });
-
-                            if (response.ok) {
-                                console.log("ça marche !");
-
-                                router.push({
-                                    pathname: '/bad',
-                                    query: {keyword: 'paysan'},
-                                })
-                            }
-
-                        } else {
-
-                            const response = await fetch(`${server}/api/addMoindix`, {
-                                method: "POST",
-                                headers: {"Content-Type": "application/json"},
-                                body: JSON.stringify({value, location, dep, ip})
-                            });
-
-                            if (response.ok) {
-                                console.log("ça marche !");
-
-                                router.push({
-                                    pathname: '/bad',
-                                    query: {keyword: 'gueux'},
-                                })
-                            }
-
-                        }
-                    }
-
-                })
-
-
+                return router.push("/bad");
+            }
 
 
 
@@ -692,10 +571,11 @@ export default function Home() {
 
     async function getcommune(dep) {
 
+        console.log(dep)
+
         fetch(`https://geo.api.gouv.fr/departements/${dep}/communes`)
             .then(res => res.json())
             .then(result => {
-
 
                 setCommune(result)
 
@@ -708,269 +588,81 @@ export default function Home() {
 
 
 
-    function handleHide(){
-
-        setShow(false)
-
-        localStorage["alreadyVisited"] = true;
-
-    }
-
 
     useEffect(() =>{
 
-        //MODAL FIRST VISIT
 
 
-            let visited = localStorage["alreadyVisited"];
-            if(visited) {
-                setShow(false)
-            } else {
-                //this is the first time
-                setShow(true)
-            }
+            getcommune(dep.num_dep)
 
-
-
-             getUser()
-                .then(res => {
-
-                    setCountUser(res);
-                });
-
-            getGueux()
-                .then(res => setCountGueux(res))
-
-
-
-            if(dep === undefined || dep === null)
-            {
-
-            }
-            else
-            {
-                getcommune(dep.num_dep)
-            }
-
-
-            if(value != null && value != undefined && dep != null && dep != undefined && location != null && location != undefined)
-            {
-                setEnable(true);
-            }
-            else
-            {
-                setEnable(false)
-            }
 
         },
-        [dep, location],
+        [dep],
     );
 
 
-    // console.log(countUser);
+
+
 
     return (
     <div className={styles.container}>
 
-
-        <Modal show={show} onHide={handleHide}>
-            <Modal.Header closeButton>
-                <Modal.Title className={styles.modal_title}>Information pour les prolétaires</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <span className={styles.modal}>
-                    Cette place virtuelle se trouve être <strong>humoristique</strong>. Tout est factices et toutes les informations que vous pouvez remplir peuvent être <strong>fictives</strong>.<br/>
-                    <br/>
-
-                    Nous ne sommes d'ailleurs <strong>affiliés en aucune manière</strong> à Louis Vignac, père de François Vignac, présent sur le sol français depuis 13 générations.
-                </span>
-
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="primary" onClick={handleHide}>
-                    J'acquiesce
-                </Button>
-            </Modal.Footer>
-        </Modal>
-
-
-        <div className={styles.wrap}>
-            <div className={styles.meta}></div>
-            <div className={styles.meta}></div>
-        </div>
-
+        <Head>
+            <title>AntiMoinsDeDix</title>
+            <meta name="Content-Type" content="UTF-8"/>
+            <meta name="Content-Language" content="fr"/>
+            <meta name="Description" content="Redonnons ensemble l'éclat d'antan à nos villes françaises !"/>
+            <meta name="Keywords" content="AntiMoinsDeDix"/>
+            <meta name="Copyright" content="Ankward"/>
+            <meta name="Author" content="Ankward"/>
+            <meta name="Identifier-Url" content="antimoinsdedix.fr"/>
+            <meta name="Revisit-After" content="1 day"/>
+            <meta name="Robots" content="all"/>
+            <meta name="Rating" content="general"/>
+            <meta name="Distribution" content="global"/>
+            <meta name="Category" content="internet"/>
+        </Head>
 
 
 
         <div className={styles.content}>
+
             <h1 className={styles.title}>#Antimoinsde<span style={{color: "#dd2d2d"}}>10</span></h1>
             <h3 className={styles.subtitle}>Redorons de prestiges nos villes Françaises !</h3>
-            <div className={styles.bar}>
-            </div>
+
 
         </div>
 
 
       <div className={"container " + styles.home}>
 
-
-          <div className={styles.statistiques}>
-
-
-              <div className={styles.statistiques_item}>
-
-                  <h3 className={styles.statistiques_explain}>Des chiffres qui parle pour nous</h3>
-
-              </div>
-
-              <div className={styles.statistiques_item}>
-
-                  <span className={styles.statistiques_stat}>{countUser}+</span>
-
-                      <h3 className={styles.statistiques_title}>Membres du parti</h3>
-
-              </div>
-
-
-              <div className={styles.statistiques_item}>
-
-                  <span className={styles.statistiques_stat}>{countGueux}+</span>
-
-
-                  <h3 className={styles.statistiques_title}>Moins de 10 repéré</h3>
-
-              </div>
-
+          <div className={styles.bar}>
           </div>
 
-          <div className={styles.statistiques_button_contain}>
-
-              <div className={styles.statistiques_button}>
-                  <Link href="/statistique">
-                      <Button variant="link" className={styles.buttonStats}>
-                          Voir toutes les statistiques
-                      </Button>
-                  </Link>
-              </div>
+          <h1 className={styles.maintenance}>SITE EN MAINTENANCE. REVENEZ BIENTÔT METTRE LES GUEUX DEHORS !</h1>
 
 
+          <div className={styles.next}>
 
-          </div>
+              <h3 className={styles.next_title}>En attendant, n'hésiter pas à nous envoyer un message pour manifester votre soutien à cette noble cause</h3>
+
+              <span className={styles.listLabel}><InstagramIcon/> </span><a href="https://www.instagram.com/ankward.fr/" target="_blank"><span className={styles.listLink}>@ankward.fr</span></a><br/>
+              <span className={styles.listLabel}><MailOutlineIcon/> </span><a href="mailto: dehors@antimoinsdedix.fr" target="_blank"><span className={styles.listLink}>dehors@antimoinsdedix.fr</span></a><br/>
+              <span className={styles.listLabel}><TwitterIcon/> </span><a href="https://twitter.com/AnkwardCreation" target="_blank"><span className={styles.listLink}>@AnkwardCreation</span></a><br/>
 
 
 
 
-
-          <div className={styles.explain}>
-
-              <div className={styles.explain_titlecontent}>
-                  <img src="/france.svg" className={styles.france} alt="france"/>
-                  <h3 className={styles.explain_title}>Qui sommes-nous ?</h3>
-
-              </div>
-              <span className={styles.explain_text}>AntiMoinsDe<span style={{color: "#dd2d2d"}}>10</span> est un parti politique créé en 2020 par une coalition de personne bien née parisien.</span>
-              <span className={styles.explain_text}>Nous avons pour vocation à mettre dehors de nos villes françaises, jadis exemple de pureté et d'élégance, les personnes gagnant moins de 10.000euros par mois.</span><br/>
-
-          </div>
-
-
-          <div className={styles.formulaireContainer}>
-
-              <div className={styles.formulaire}>
-                  <Form onSubmit={handleSubmit}>
-                      <Form.Label className={styles.label}>Rejoignez la communauté, tester votre éligibilité</Form.Label>
-                      <InputGroup hasValidation className={styles.input}>
-                          <InputGroup.Prepend>
-                              <InputGroup.Text id="inputGroupPrepend" className={styles.inputSalaire_prepend}>€</InputGroup.Text>
-                          </InputGroup.Prepend>
-                          <Form.Control
-                              type="number"
-                              className={styles.inputSalaire}
-                              name="money"
-                              placeholder="Votre salaire mensuel"
-                              aria-describedby="inputGroupPrepend"
-                              value={value}
-                              onChange={handleChange}
-                              required
-                          />
-                      </InputGroup>
-
-                      <MDBRow>
-                          <MDBCol>
-                              <Autocomplete
-                                  // multiple
-                                  options={departement}
-                                  getOptionLabel={(option) => option.dep_name}
-                                  onChange={(event, newValue) => {
-                                      setDep(newValue);
-                                  }}
-                                  value={dep}
-                                  renderInput={params => (
-                                      <TextField
-                                          {...params}
-                                          variant="standard"
-                                          label="Département"
-                                          placeholder="Favorites"
-                                          className={styles.field}
-                                      />
-                                  )}
-                              />
-                          </MDBCol>
-                          <MDBCol>
-                              <Autocomplete
-                                  id="combo-box-demo"
-                                  value={location}
-                                  options={commune}
-                                  getOptionLabel={(option) => option.nom}
-                                  onChange={(event, newValue) => {
-                                      setLocation(newValue);
-                                  }}
-                                  renderInput={(params) => (
-                                      <TextField
-                                          {...params}
-                                          variant="standard"
-                                          label="Ville"
-                                          placeholder="Favorites"
-                                          className={styles.field}
-                                      />
-                                  )}
-                              />
-                          </MDBCol>
-
-
-                      </MDBRow>
-                      <MDBRow end>
-                          <div>
-                              {!enable ?
-
-                                  <div className={styles.formulaire_button}>
-                                      <Button variant="primary" type="submit" className={styles.button} disabled>
-                                          Valider
-                                      </Button>
-                                  </div>
-
-                                  :
-                                  <div className={styles.formulaire_button}>
-                                      <Button variant="primary" type="submit" className={styles.button}>
-                                          Valider
-                                      </Button>
-                                  </div>
-                              }
-                          </div>
-                      </MDBRow>
-
-
-
-
-                  </Form>
-
-              </div>
           </div>
 
       </div>
 
-        <Footer />
 
-    </div>
+            <div className={styles.footer}>
+
+                <Footer />
+
+            </div>
+        </div>
   )
 }
