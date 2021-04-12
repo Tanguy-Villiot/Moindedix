@@ -38,17 +38,18 @@ export default function Light(){
     }
 
 
-    //VIEW METHODS
+    return (
 
-    function Render(){
+        <>
 
-        if (Router.query.money < 10000 || Router.query.money === undefined) {
-            return(
-                <>
-                </>
-            )
-        } else {
-            return (
+            {Router.query.money === undefined ?
+
+            <>
+            </>
+
+                :
+
+
                 <div className={styles.main}>
 
                     <div className={styles.content}>
@@ -63,13 +64,14 @@ export default function Light(){
 
                 </div>
 
-            )
-        }
 
-    }
+            }
 
-    return(
-        <Render />
+
+        </>
+
+
+
     )
 
 

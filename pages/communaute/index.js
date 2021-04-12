@@ -9,13 +9,11 @@ export default function Index(){
 
     return(
 
-        <div>
+        <div className={styles.page}>
             <div className={styles.curtain}>
 
                 <span className={styles.curtain_title}>Vous n'êtes sûrement pas franco-gaullois, ni présent sur le sol français depuis treize générations, mais votre participation est chère à nos yeux</span>
-
             </div>
-
 
             <NavbarSite />
 

@@ -20,21 +20,10 @@ handler.post(async (req, res) => {
         ville: data.location.nom,
         departement: data.dep.dep_name,
         Region: data.dep.region_name,
-        money: data.value
+        money: data.value,
+        ip: data.ip
 
     })
-
-
-    // {
-    //     "nom": "Ambutrix",
-    //     "code": "01008",
-    //     "codeDepartement": "01",
-    //     "codeRegion": "84",
-    //     "codesPostaux": [
-    //     "01500"
-    // ],
-    //     "population": 750
-    // }
 
     res.json({message : "OK"});
 

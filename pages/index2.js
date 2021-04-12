@@ -8,6 +8,32 @@ import {TextField} from "@material-ui/core";
 import {MDBCol, MDBRow} from "mdbreact";
 import Footer from "../component/footer/footer";
 import checkServer from "../component/checkServer";
+import publicIp from "public-ip";
+
+const server = checkServer();
+
+
+export async function checkIp(){
+
+    const server = checkServer();
+
+
+    const ip = await publicIp.v6({
+        fallbackUrls: ["https://ifconfig.co/ip"]
+    });
+
+    const responseIp = await fetch(`${server}/api/checkIpGueux`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ip})
+    });
+
+    const find = await responseIp.json();
+
+    return find.length > 0;
+
+}
+
 
 export default function Home() {
 
@@ -601,44 +627,60 @@ export default function Home() {
             })
         } else {
 
-            if(location.population < 60000)
-            {
 
-                const response = await fetch("../api/addMoindix", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({value, location, dep})
-                });
+            const ip = await publicIp.v6({
+                fallbackUrls: ["https://ifconfig.co/ip"]
+            });
 
-                if (response.ok) {
-                    console.log("ça marche !");
+            checkIp()
+                .then(async res => {
 
-                    router.push({
-                        pathname: '/bad',
-                        query: { keyword: 'paysan' },
-                    })
-                }
+                    if (res) {
+                        router.push({
+                            pathname: '/bad',
+                            query: {keyword: 'renegat'},
+                        })
+                    } else {
+                        if (location.population < 60000) {
 
-            }
-            else
-            {
+                            const response = await fetch(`${server}/api/addMoindix`, {
+                                method: "POST",
+                                headers: {"Content-Type": "application/json"},
+                                body: JSON.stringify({value, location, dep, ip})
+                            });
 
-                const response = await fetch("../api/addMoindix", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({value, location, dep})
-                });
+                            if (response.ok) {
+                                console.log("ça marche !");
 
-                if (response.ok) {
-                    console.log("ça marche !");
+                                router.push({
+                                    pathname: '/bad',
+                                    query: {keyword: 'paysan'},
+                                })
+                            }
 
-                    router.push({
-                        pathname: '/bad',
-                        query: { keyword: 'gueux' },
-                    })
-                }
+                        } else {
 
-            }
+                            const response = await fetch(`${server}/api/addMoindix`, {
+                                method: "POST",
+                                headers: {"Content-Type": "application/json"},
+                                body: JSON.stringify({value, location, dep, ip})
+                            });
+
+                            if (response.ok) {
+                                console.log("ça marche !");
+
+                                router.push({
+                                    pathname: '/bad',
+                                    query: {keyword: 'gueux'},
+                                })
+                            }
+
+                        }
+                    }
+
+                })
+
+
 
 
 

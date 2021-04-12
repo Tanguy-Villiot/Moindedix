@@ -5,21 +5,19 @@
     background-repeat: no-repeat;
     background-size: cover;
 
-    opacity: 0;
     animation: image ease 2.5s;
-    -webkit-animation: image ease 2.5s;
     animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
 }
 
 
 @keyframes image {
-    from {
-        top: 0;
-        opacity: 0;
 
+    0%{
+        opacity: 0;
     }
 
-    to {
+    100% {
         opacity: 1;
 
     }
@@ -112,6 +110,12 @@
         box-shadow: unset;
         backdrop-filter: unset;
         width: 15em;
+    }
+
+    .button:Hover
+    {
+        background-color: rgba(255,255,255,0.30);
+
     }
 
     .title

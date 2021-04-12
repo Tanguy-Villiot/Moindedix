@@ -1,3 +1,25 @@
+.page
+{
+    position: fixed;
+
+    animation: page ease 1s;
+    -webkit-animation: page ease 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 9s;
+}
+
+@keyframes page {
+    0% {    position: fixed;
+    }
+
+    99%{
+        position: fixed;
+    }
+
+    100% {    position: relative;}
+}
+
+
 .title
 {
     font-family: Inter-Bold;
@@ -27,6 +49,10 @@
     display: flex;
     align-items: center;
     margin-bottom: 4em;
+
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .step_nbr
@@ -242,5 +268,10 @@
     .buttonStats
     {
         font-size: 0.6em;
+    }
+
+    .asterix
+    {
+        margin-bottom: 2em;
     }
 }
