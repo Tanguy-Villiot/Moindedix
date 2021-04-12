@@ -1,15 +1,23 @@
 .footer
 {
     color: black;
-    /*width: 90vw !important;*/
-    padding-left: 3em;
-    padding-right: 3em;
-    padding-top: 0.2em;
-    padding-bottom: 1em;
+    padding: 0.2em 3em 1em;
     bottom: 0;
     margin-top: 3em;
 
     text-align: center;
+}
+
+.link
+{
+    color: black;
+    transition: 0.3s;
+}
+
+.link:Hover
+{
+    text-decoration: none;
+    color: #58a8ff;
 }
 
 

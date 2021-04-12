@@ -65,7 +65,7 @@ export default function Black() {
                             <>
 
                         <span className={styles.subtitle}>Notre communauté souhaiterait cependant vous remercier. <br/>
-                            En effet, être un moins de 10 doits être une tarre, mais le fait que vous soyez loin de nos villes lumières est tout à votre honneur.</span>
+                            En effet, être un moins de 10 doits être une tare, mais le fait que vous soyez loin de nos villes lumières est tout à votre honneur.</span>
 
                             </>
 
@@ -149,6 +149,18 @@ export default function Black() {
 
                         }
 
+
+                        <div className={styles.reseauxContain}>
+
+                            <h3 className={styles.reseaux_title}>Venez tout de même discutailler avec nous, nous trouverons peut-être une solution</h3>
+
+                            <Link href="https://www.instagram.com/ankward.fr/">
+                                <a target="_blank"><br/><span className={styles.reseaux}><img src="/communaute/instagram.svg" className={styles.imgReseaux} alt="instagram" /> @ankward.fr</span></a>
+                            </Link>
+                            <Link href="https://twitter.com/AnkwardCreation">
+                                <a target="_blank"><span className={styles.reseaux}><img src="/communaute/twitter.svg" className={styles.imgReseaux} alt="instagram" /> @AnkwardCreation</span></a>
+                            </Link>
+                        </div>
 
 
 

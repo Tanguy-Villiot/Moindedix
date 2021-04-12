@@ -96,9 +96,41 @@
 .button_renegat
 {
     margin-top: 3em;
-    margin-bottom: 6em;
 }
 
+.reseauxContain
+{
+    margin-top: 3em;
+    margin-bottom: 4em;
+    text-align: center;
+}
+
+.reseaux_title
+{
+    font-size: 1em;
+    font-family: Inter-Bold,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    text-align: center;
+
+}
+
+.reseaux
+{
+    display: block;
+    margin-bottom: 1em;
+    font-family: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    color: #007bff;
+}
+
+.reseaux:Hover
+{
+    cursor: pointer;
+}
+
+.imgReseaux
+{
+    height: 2em;
+    margin-right: 0.5em;
+}
 
 
 /*CURTAIN*/

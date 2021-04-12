@@ -622,11 +622,6 @@ export default function Statistique(){
 
 
 
-
-
-    console.log(lastUser)
-
-
     function handleSubmit(){
 
     }

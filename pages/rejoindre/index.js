@@ -8,6 +8,7 @@ import publicIp from "public-ip";
 import ToastifyContext from "../../component/toastify/context";
 import NavbarSite from "../../component/navbar/navbar";
 import checkServer from "../../component/checkServer";
+import Footer from "../../component/footer/footer";
 
 
 
@@ -204,7 +205,7 @@ export default function Index(){
 
                             <>
 
-                                <h1 className={styles.title}>Plus qu'un petit palier, <br/>affirmer avec nous votre volonté !</h1>
+                                <h1 className={styles.title}>Plus qu'un petit palier, <br/>assurer avec nous votre volonté !</h1>
                                 <h3 className={styles.subtitle}>Remplissez votre nom et prénom fictif pour terminer votre participation.</h3>
 
 
@@ -264,9 +265,17 @@ export default function Index(){
 
                     </div>
 
+
+                    <Footer />
+
+
                 </>
 
+
+
             }
+
+
 
 
         </div>

@@ -31,6 +31,24 @@
     margin: auto;
 }
 
+.imgReseaux
+{
+    height: 2em;
+    margin-right: 0.5em;
+}
+
+.link
+{
+    color: black;
+    transition: 0.3s;
+}
+
+.link:Hover
+{
+    text-decoration: none;
+    color: #58a8ff;
+}
+
 
 /*PHONE*/
 

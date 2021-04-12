@@ -12,7 +12,7 @@ export default function Footer(){
             <div>
 
                     <Link href="/contact">
-                        <span href="/contact" className={styles.link} style={{paddingTop: "0.125rem", fontFamily: "Inter-Bold"}}>Nous contacter</span>
+                        <a className={styles.link}><span href="/contact" className={styles.link} style={{paddingTop: "0.125rem", fontFamily: "Inter-Bold"}}>Nous contacter</span></a>
                     </Link>
 
             </div>

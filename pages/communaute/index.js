@@ -12,7 +12,7 @@ export default function Index(){
         <div className={styles.page}>
             <div className={styles.curtain}>
 
-                <span className={styles.curtain_title}>Vous n'êtes sûrement pas franco-gaullois, ni présent sur le sol français depuis treize générations, mais votre participation est chère à nos yeux</span>
+                <span className={styles.curtain_title}>Vous n'êtes sûrement pas franco-gaullois, ni présent sur le sol français depuis treize générations, mais vous en êtes pas moins un des nôtres.</span>
             </div>
 
             <NavbarSite />
@@ -34,11 +34,11 @@ export default function Index(){
 
                                 <span className={styles.step_text}>Venez discutailler avec nous sur ce qu'on appele plus communément les "réseaux sociaux" et partager vos motivations dans cette cause noble<span style={{color: "#0004ff"}}>*</span></span>
                             <br/>
-                        <Link href="https://www.instagram.com/ankward.fr/">
-                            <><br/><span className={styles.reseaux}><img src="/communaute/instagram.svg" className={styles.imgReseaux} alt="instagram" /> @ankward.fr</span></>
-                        </Link>
+                            <Link href="https://www.instagram.com/ankward.fr/">
+                                <a target="_blank"><br/><span className={styles.reseaux}><img src="/communaute/instagram.svg" className={styles.imgReseaux} alt="instagram" /> @ankward.fr</span></a>
+                            </Link>
                             <Link href="https://twitter.com/AnkwardCreation">
-                                <><span className={styles.reseaux}><img src="/communaute/twitter.svg" className={styles.imgReseaux} alt="instagram" /> @AnkwardCreation</span></>
+                                <a target="_blank"><span className={styles.reseaux}><img src="/communaute/twitter.svg" className={styles.imgReseaux} alt="instagram" /> @AnkwardCreation</span></a>
                             </Link>
                         </div>
 
