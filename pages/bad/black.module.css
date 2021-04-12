@@ -188,6 +188,8 @@
     display: block;
     font-size: 2em;
     text-transform: uppercase;
+    padding: 1em;
+
 
     opacity: 0.0;
     animation: fadeIn ease 3s;
@@ -263,6 +265,11 @@
         font-size: 0.8em;
         line-height: 1.5em;
         margin-top: 3em;
+    }
+
+    .curtain_title
+    {
+        font-size: 1.5em;
     }
 }
 

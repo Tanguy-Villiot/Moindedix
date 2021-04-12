@@ -56,7 +56,16 @@ export default function Black() {
 
                         <div className={styles.titlecontainer}>
                             <img src="/bad/stop.svg" className={styles.stop} alt="france"/>
-                            <h1 className={styles.title}>Vous n'êtes pas éligible ! Nous ne sommes pas étonnés.</h1>
+
+                            {router.query.keyword === "renegat" ?
+
+                                <h1 className={styles.title}>Vous n'êtes <span style={{color: "#dd2d2d"}}>toujours</span> pas éligible ! Nous ne sommes pas étonnés.</h1>
+
+
+                                :
+
+                                <h1 className={styles.title}>Vous n'êtes pas éligible ! Nous ne sommes pas étonnés.</h1>
+                            }
                         </div>
 
 
