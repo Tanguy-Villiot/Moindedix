@@ -126,28 +126,6 @@ export default function Index(){
 
 
 
-    //VIEW METHODS
-
-    function BOUTON(){
-
-        if(value.nom === "" || value.prenom === "")
-        {
-            return (
-                <Button variant="primary" type="submit" className={styles.button} disabled>
-                    Valider sa participation
-                </Button>
-            )
-        }
-        else
-        {
-            return (
-                <Button variant="primary" type="submit" className={styles.button}>
-                    Valider sa participation
-                </Button>
-            )
-        }
-
-    }
 
 
     return(
@@ -211,7 +189,7 @@ export default function Index(){
 
                                 <div className={styles.content}>
 
-                                    <Form onSubmit={handleSubmit}>
+                                    <form onSubmit={handleSubmit}>
 
                                         <MDBRow className={styles.form_row}>
                                             <MDBCol>
@@ -230,9 +208,11 @@ export default function Index(){
                                                     />
                                                 </InputGroup>
 
+
                                             </MDBCol>
 
                                             <MDBCol>
+
 
                                                 <label htmlFor="prenom">Prénom</label>
                                                 <InputGroup hasValidation className={styles.input}>
@@ -251,9 +231,40 @@ export default function Index(){
                                             </MDBCol>
 
                                         </MDBRow>
+                                        <MDBRow>
+                                            {value.nom === "" ?
 
-                                        <BOUTON />
-                                    </Form>
+                                                <Button variant="primary" type="submit" className={styles.button} disabled>
+                                                    Valider sa participation
+                                                </Button>
+
+                                                :
+
+                                                <>
+
+                                                    {value.prenom === "" ?
+
+                                                        <Button variant="primary" type="submit" className={styles.button}
+                                                                disabled>
+                                                            Valider sa participation
+                                                        </Button>
+
+                                                        :
+
+                                                        <Button variant="primary" type="submit" className={styles.button}>
+                                                            Valider sa participation
+                                                        </Button>
+
+                                                    }
+
+                                                </>
+
+                                            }
+                                        </MDBRow>
+
+
+
+                                    </form>
                                 </div>
 
                             </>
@@ -261,12 +272,12 @@ export default function Index(){
                         }
 
 
+                        <Footer />
 
 
                     </div>
 
 
-                    <Footer />
 
 
                 </>

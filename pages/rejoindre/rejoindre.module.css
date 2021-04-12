@@ -67,8 +67,9 @@
 
 .button
 {
-    float: right;
+    margin: auto;
     margin-top: 2em;
+    display: block;
 }
 
 

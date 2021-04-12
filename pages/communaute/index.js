@@ -35,10 +35,10 @@ export default function Index(){
                                 <span className={styles.step_text}>Venez discutailler avec nous sur ce qu'on appele plus communément les "réseaux sociaux" et partager vos motivations dans cette cause noble<span style={{color: "#0004ff"}}>*</span></span>
                             <br/>
                             <Link href="https://www.instagram.com/ankward.fr/">
-                                <a target="_blank"><br/><span className={styles.reseaux}><img src="/communaute/instagram.svg" className={styles.imgReseaux} alt="instagram" /> @ankward.fr</span></a>
+                                <a target="_blank" className={styles.a}><br/><span className={styles.reseaux}><img src="/communaute/instagram.svg" className={styles.imgReseaux} alt="instagram" /> @ankward.fr</span></a>
                             </Link>
                             <Link href="https://twitter.com/AnkwardCreation">
-                                <a target="_blank"><span className={styles.reseaux}><img src="/communaute/twitter.svg" className={styles.imgReseaux} alt="instagram" /> @AnkwardCreation</span></a>
+                                <a target="_blank" className={styles.a}><span className={styles.reseaux}><img src="/communaute/twitter.svg" className={styles.imgReseaux} alt="instagram" /> @AnkwardCreation</span></a>
                             </Link>
                         </div>
 
