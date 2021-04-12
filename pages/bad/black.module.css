@@ -119,17 +119,24 @@
     margin-bottom: 1em;
     font-family: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     color: #007bff;
+    transition: 0.3s;
 }
 
 .reseaux:Hover
 {
-    cursor: pointer;
+    color: #7abeea;
 }
 
 .imgReseaux
 {
     height: 2em;
     margin-right: 0.5em;
+}
+
+.a
+{
+    text-decoration: none;
+
 }
 
 

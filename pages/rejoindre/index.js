@@ -160,7 +160,7 @@ export default function Index(){
 
                             <>
 
-                                <h1 className={styles.title}>Diantre, il s'emblerait que vous ayez <br/>déjà apposé votre candidature</h1>
+                                <h1 className={styles.title}>Diantre, il semblerait que vous ayez <br/>déjà apposé votre candidature</h1>
                                 <h3 className={styles.subtitle_find}>Vous pouvez toujours convenir de vous rendre sur la page statistique.</h3>
 
                                 <div className={styles.statistiques_button_contain}>

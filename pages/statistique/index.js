@@ -842,7 +842,7 @@ export default function Statistique(){
 
 
                         <h1 className={styles.title}>Toutes nos statistiques</h1>
-                        <h3 className={styles.subtitle}>Ouvrez bien vos esgourdes, ce que vous allez voir peut-être choquant.</h3>
+                        <h3 className={styles.subtitle}>L'ampleur des dégâts se doit être mise aux yeux de tous.</h3>
 
 
                         <div className={styles.category}>
@@ -1089,6 +1089,7 @@ export default function Statistique(){
 
 
                         <h1 className={styles.news}>De nouvelles statistiques arrivent tout les jours !</h1>
+                        <h3 className={styles.newsSubtitle}>(et de nouveaux moyens de comparaison également)</h3>
 
                         <Footer />
 

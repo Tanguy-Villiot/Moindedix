@@ -10,6 +10,16 @@
     font-family: "Inter-Bold";
 }
 
+.joke{
+    transition: 0.3s;
+}
+
+.joke:Hover
+{
+    cursor: pointer;
+    color: #bd93d8 !important;
+}
+
 
 @media only screen and (max-width: 600px) {
 

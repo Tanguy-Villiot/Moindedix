@@ -32,7 +32,7 @@ export default function Index(){
                         <div className={styles.step_content}>
 
 
-                                <span className={styles.step_text}>Venez discutailler avec nous sur ce qu'on appele plus communément les "réseaux sociaux" et partager vos motivations dans cette cause noble<span style={{color: "#0004ff"}}>*</span></span>
+                                <span className={styles.step_text}>Venez discutailler avec nous sur ce qu'on appelle plus communément les "réseaux sociaux" et apporter votre pierre à l'édifice dans cette noble cause<span style={{color: "#0004ff"}}>*</span></span>
                             <br/>
                             <Link href="https://www.instagram.com/ankward.fr/">
                                 <a target="_blank" className={styles.a}><br/><span className={styles.reseaux}><img src="/communaute/instagram.svg" className={styles.imgReseaux} alt="instagram" /> @ankward.fr</span></a>
@@ -76,7 +76,7 @@ export default function Index(){
 
                         <div className={styles.step_content}>
 
-                            <span className={styles.step_text}>Réunissons vous entre entre personne de même caste et organiser des battus afin de bouter les moins de <span style={{color: "#dd2d2d"}}>10</span> à venir sur le site.</span>
+                            <span className={styles.step_text}>Réunissez-vous entre entre personne de même caste et organiser des battus afin de bouter les moins de <span style={{color: "#dd2d2d"}}>10</span> à venir sur le site.</span>
 
                         </div>
 
