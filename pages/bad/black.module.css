@@ -5,13 +5,31 @@
     font-family: "Inter-Bold";
 }
 
+.footer
+{
+    position: fixed !important;
+}
+
+.titlecontainer
+{
+    display: flex;
+    align-items: center;
+    margin-top: 3em;
+    margin-bottom: 2.5em;
+}
+
+.stop
+{
+    height: 3em;
+    margin-right: 1em;
+}
+
 .title
 {
     font-family: Inter-Bold, "Comic Sans MS";
     text-transform: uppercase;
     font-size: 1.75em;
-    margin-top: 2em;
-    margin-bottom: 0.75em;
+    margin-bottom: unset;
 }
 
 .subtitle
@@ -51,6 +69,7 @@
     margin-left: 12em;
 }
 
+
 .statistiques_button
 {
     float: right;
@@ -72,6 +91,12 @@
     color: white;
     /*background-color: rgba(88, 168, 255, 0.3);*/
     text-decoration: none;
+}
+
+.button_renegat
+{
+    margin-top: 3em;
+    margin-bottom: 6em;
 }
 
 

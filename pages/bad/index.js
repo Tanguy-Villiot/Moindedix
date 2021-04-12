@@ -21,7 +21,15 @@ export default function Black() {
     useEffect(() =>{
 
 
+        if(router.query.keyword === undefined)
+        {
+            router.push("/")
 
+        }
+        else
+        {
+            setLoading(false);
+        }
 
 
         },
@@ -32,10 +40,24 @@ export default function Black() {
         <>
             <NavbarSite />
 
+            {loading ?
+
+            <>
+
+
+                </>
+
+            :
+
+                <>
+
 
                     <div className="container">
 
-                        <h1 className={styles.title}>Vous n'êtes pas éligible ! Nous ne sommes pas étonnés.</h1>
+                        <div className={styles.titlecontainer}>
+                            <img src="/bad/stop.svg" className={styles.stop} alt="france"/>
+                            <h1 className={styles.title}>Vous n'êtes pas éligible ! Nous ne sommes pas étonnés.</h1>
+                        </div>
 
 
                         {router.query.keyword === "paysan" ?
@@ -50,7 +72,7 @@ export default function Black() {
                             :
                             <>
 
-                            {router.query.keyword === "renegat" ?
+                                {router.query.keyword === "renegat" ?
 
                                     <>
 
@@ -60,7 +82,7 @@ export default function Black() {
 
                                     </>
 
-                            :
+                                    :
 
                                     <>
 
@@ -70,7 +92,7 @@ export default function Black() {
 
                                     </>
 
-                            }
+                                }
 
                             </>
 
@@ -82,19 +104,16 @@ export default function Black() {
 
                         {router.query.keyword === "renegat" ?
 
-                            <div className={styles.statistiques_button_contain} style={{marginTop: "3em"}}>
-
-                                <div className={styles.statistiques_button}>
-                                    <Link href="/statistique">
-                                        <Button variant="link" className={styles.buttonStats}>
-                                            Voir toutes les statistiques
-                                        </Button>
-                                    </Link>
-                                </div>
 
 
-
+                            <div className={styles.button_renegat}>
+                                <Link href="/statistique">
+                                    <Button variant="link" className={styles.buttonStats} style={{display: "block", margin: "auto"}}>
+                                        Voir toutes les statistiques
+                                    </Button>
+                                </Link>
                             </div>
+
 
                             :
 
@@ -130,7 +149,7 @@ export default function Black() {
 
                         }
 
-                        
+
 
 
                         <Footer />
@@ -156,7 +175,21 @@ export default function Black() {
 
                                     :
 
-                                    <span className={styles.curtain_title}>Si tu as la dalle, quitte la capitale ! <br/><span className={styles.curtain_subtitle}>Ou tout autre ville respectueuses, nous ne sommes pas des sauvages.</span></span>
+                                    <>
+                                        {router.query.keyword === "renegat" ?
+
+
+                                            <span className={styles.curtain_title}>Votre intelligence est d'une simplicité déconcertante.</span>
+
+                                            :
+
+
+                                            <span className={styles.curtain_title}>Si tu as la dalle, quitte la capitale ! <br/><span
+                                                className={styles.curtain_subtitle}>Ou tout autre ville respectueuses, nous ne sommes pas des sauvages.</span></span>
+                                        }
+
+                                    </>
+
 
 
 
@@ -171,6 +204,12 @@ export default function Black() {
 
 
                     </div>
+
+
+
+                </>
+
+            }
 
 
 
