@@ -32,9 +32,10 @@ export async function checkIp(){
 
 }
 
-export default function Index({find}){
+export default function Index(){
 
     const [loading, setLoading] = useState(true);
+    const [find, setFind] = useState(undefined);
 
     const router = useRouter();
     const toastify = useContext(ToastifyContext);
@@ -100,9 +101,9 @@ export default function Index({find}){
 
                 if(res)
                 {
+                    setFind(true);
 
-                        router.push("/");
-
+                    setLoading(false);
                 }
                 else
                 {
@@ -176,7 +177,7 @@ export default function Index({find}){
                         </div>
 
 
-                        {find.length > 0 ?
+                        {find ?
 
                             <>
 
@@ -268,42 +269,9 @@ export default function Index({find}){
             }
 
 
-
-
-
         </div>
 
     )
 
 }
-export async function getServerSideProps() {
-    // Call an external API endpoint to get posts.
-    // You can use any data fetching library
 
-    const server = checkServer();
-
-
-    // const ip = await publicIp.v6({
-    //     fallbackUrls: ["https://ifconfig.co/ip"]
-    // });
-
-    const ip = "10001"
-
-
-    const responseIp = await fetch(`${server}/api/checkIp`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ip})
-    });
-
-    const find = await responseIp.json();
-
-
-    // By returning { props: { posts } }, the Blog component
-    // will receive `posts` as a prop at build time
-    return {
-        props: {
-            find,
-        },
-    }
-}
