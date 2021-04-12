@@ -1,17 +1,21 @@
 import styles from './statistique.module.css';
-import {Accordion, Button, Card, Form, Navbar} from "react-bootstrap";
-import {MDBCol, MDBContainer, MDBDataTableV5, MDBRow} from "mdbreact";
+import { Button, Form} from "react-bootstrap";
+import {MDBCol, MDBDataTableV5, MDBRow} from "mdbreact";
 import {TextField} from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import checkServer from "../../component/checkServer";
-import Link from "next/link";
 import NavbarSite from "../../component/navbar/navbar";
 import Footer from "../../component/footer/footer";
-import {map} from "react-bootstrap/ElementChildren";
+import {getCountGueux, getCountUser, getGueux, getLastUser} from "../../component/statistique/model";
 
-export default function Statistique({table, tableUser, countUser, countGueux}){
+const server = checkServer();
+
+export default function Statistique(){
+
+    const [loading, setLoading] = useState(true);
+
 
     const departement = [
         {
@@ -537,19 +541,11 @@ export default function Statistique({table, tableUser, countUser, countGueux}){
         "Provence-Alpes-Côte d'Azur"
     ]
 
-    const [dep, setDep] = useState(departement[0])
-    const [region, setRegion] = useState(régions[0])
-    const [commune, setCommune] = useState(undefined);
-    const [ville, setVille] = useState("Paris");
 
-    //RESULTATS
-    const [result, setResult] = useState(undefined)
+    //------------ DATA -----------//
 
-    const router = useRouter()
-
-
-    //Table - 10
-    let lastMoinsDix = {
+    //Table
+    const [lastMoinsDix, setLastMoinsDix] = useState({
             columns: [
                 {
                     label: 'Ville',
@@ -578,53 +574,55 @@ export default function Statistique({table, tableUser, countUser, countGueux}){
                 }
             ],
         }
+    )
 
-    let rows = table.rows[0];
-
-    lastMoinsDix = {
-        ...lastMoinsDix,
-        rows
-    }
-
-
-    //Table User
-
-    let lastUser = {
-        columns: [
-            {
-                label: 'Ville',
-                field: `ville`,
-                width: 150,
-                attributes: {
-                    'aria-controls': 'DataTable',
-                    'aria-label': 'Name',
+    const [lastUser, setLastUser] = useState({
+            columns: [
+                {
+                    label: 'Ville',
+                    field: `ville`,
+                    width: 150,
+                    attributes: {
+                        'aria-controls': 'DataTable',
+                        'aria-label': 'Name',
+                    },
                 },
-            },
-            {
-                label: 'Department',
-                field: 'departement',
-                width: 270,
-            },
-            {
-                label: 'Région',
-                field: 'region',
-                width: 200,
-            },
-            {
-                label: 'Salaire',
-                field: 'money',
-                sort: 'asc',
-                width: 100,
-            }
-        ],
-    }
+                {
+                    label: 'Department',
+                    field: 'departement',
+                    width: 270,
+                },
+                {
+                    label: 'Région',
+                    field: 'region',
+                    width: 200,
+                },
+                {
+                    label: 'Salaire',
+                    field: 'money',
+                    sort: 'asc',
+                    width: 100,
+                }
+            ],
+        }
+    )
 
-    rows = tableUser.rows[0];
+    const [countUser, setCountUser] = useState(undefined);
+    const [countGueux, setCountGueux] = useState(undefined);
 
-    lastUser = {
-        ...lastUser,
-        rows
-    }
+    const [dep, setDep] = useState(departement[0])
+    const [region, setRegion] = useState(régions[0])
+    const [commune, setCommune] = useState(undefined);
+    const [ville, setVille] = useState("Paris");
+
+    //RESULTATS
+    const [result, setResult] = useState(undefined)
+
+    const router = useRouter()
+
+
+
+
 
     console.log(lastUser)
 
@@ -713,6 +711,58 @@ export default function Statistique({table, tableUser, countUser, countGueux}){
         setResult(resul);
     }
 
+
+    useEffect(() => {
+
+
+        getGueux()
+            .then(res => {
+
+                let rows = res.rows[0];
+
+                setLastMoinsDix({
+                    ...lastMoinsDix,
+                    rows
+                });
+
+                console.log(lastMoinsDix);
+
+            })
+
+
+        getLastUser()
+            .then(res => {
+
+
+                let rows = res.rows[0];
+
+                setLastUser( {
+                    ...lastUser,
+                    rows
+                })
+
+            })
+
+        getCountUser()
+            .then(res => {
+
+                setCountUser(res);
+
+            })
+
+        getCountGueux()
+            .then(res => {
+
+                setCountGueux(res);
+            })
+
+        setLoading(false);
+
+
+
+    },
+        []);
+
     //VIEW METHODS
 
     function BOUTONVILLE(){
@@ -780,322 +830,287 @@ export default function Statistique({table, tableUser, countUser, countGueux}){
 
     return(
         <div>
-            <NavbarSite />
-            <div className="container">
 
-                <h1 className={styles.title}>Toutes nos statistiques</h1>
-                <h3 className={styles.subtitle}>Ouvrez bien vos esgourdes, ce que vous allez voir peut-être choquant.</h3>
+            {loading ?
 
+                <>
 
-                <div className={styles.category}>
+                    <h1>Loading ...</h1>
 
-                    <div className={styles.category_Row}>
+                </>
 
-                        <div className={styles.category_item}>
+            :
+                <>
 
-                            <img src="/statistique/statistics.svg" className={styles.category_img} alt="statistique" />
+                    <NavbarSite />
+                    <div className="container">
 
-                            <div className={styles.category_containerTitle}>
-                                <h3 className={styles.category_title}>Statistique générale</h3>
 
-                            </div>
+                        <h1 className={styles.title}>Toutes nos statistiques</h1>
+                        <h3 className={styles.subtitle}>Ouvrez bien vos esgourdes, ce que vous allez voir peut-être choquant.</h3>
 
-                        </div>
 
-                        <div className={styles.category_item}>
+                        <div className={styles.category}>
 
+                            <div className={styles.category_Row}>
 
-                            <img src="/statistique/france.svg" className={styles.category_img} alt="statistique" />
+                                <div className={styles.category_item}>
 
-                            <div className={styles.category_containerTitle}>
-                                <h3 className={styles.category_title}>Statistique détaillée</h3>
+                                    <img src="/statistique/statistics.svg" className={styles.category_img} alt="statistique" />
 
-                            </div>
+                                    <div className={styles.category_containerTitle}>
+                                        <h3 className={styles.category_title}>Statistique générale</h3>
 
+                                    </div>
 
-                        </div>
-
-                        <div className={styles.category_item}>
-
-
-                            <img src="/statistique/ranking.svg" className={styles.category_img} alt="statistique" />
-
-                            <div className={styles.category_containerTitle}>
-                                <h3 className={styles.category_title}>Classement</h3>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-
-
-                </div>
-
-
-
-                {/*STATISTIQUE GENERALE*/}
-                <div className={styles.preStats}>
-
-                    <h3 className={styles.commun_title}>- Statistique générale</h3>
-
-
-                    <div className={styles.preStats_content}>
-                        <div className={styles.preStats_item}>
-
-                                <span className={styles.preStats_stat}>{countUser}</span>
-
-
-                                <h3 className={styles.preStats_item_title}>Membres du parti</h3>
-
-
-                        </div>
-
-                        <div className={styles.preStats_item}>
-
-                                <span className={styles.preStats_stat}>{countGueux}</span>
-
-
-                                <h3 className={styles.preStats_item_title}>- de 10 repéré</h3>
-
-
-
-
-                        </div>
-                    </div>
-
-                    <div className={styles.preStats_contentLast}>
-
-                        <div className={styles.preStats_content_item}>
-                            <h3 className={styles.preStats_content_item_title}>Derniers membre enregistrés</h3>
-
-                            <div className={styles.preStats_contentLast_table}>
-
-                                <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={lastUser} proSelect />
-
-                            </div>
-                        </div>
-
-                        <div className={styles.preStats_content_item}>
-                            <h3 className={styles.preStats_content_item_title}>Derniers moins de 10 enregistrés</h3>
-
-                            <div className={styles.preStats_contentLast_table}>
-
-                                <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={lastMoinsDix} proSelect />
-
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
-
-                </div>
-
-
-                {/*STATISTIQUE DETAILLEE*/}
-                <div className={styles.statistique_detaillee}>
-
-                    <h3 className={styles.commun_title}>- Statistique détaillée</h3>
-
-                    <MDBRow className={styles.row}>
-                        <MDBCol>
-                            <h3 className={styles.statistique_detaillee_search}>Trouver les gueux par ville !</h3>
-
-                            <Form onSubmit={handleClickVille}>
-                                <MDBRow>
-                                    <MDBCol>
-                                        <TextField
-                                            variant="standard"
-                                            label="Ville"
-                                            value={ville}
-                                            onChange={(event) => {
-                                                setVille(event.target.value);
-                                            } }
-                                            className={styles.field}
-                                        />
-                                    </MDBCol>
-
-                                </MDBRow>
-
-                                <BOUTONVILLE />
-
-
-                            </Form>
-                        </MDBCol>
-                        <MDBCol>
-                            <h3 className={styles.statistique_detaillee_search} style={{color: "#ddb12d"}}>Trouver les gueux par région !</h3>
-
-                            <Form onSubmit={handleClickRegion}>
-                                <MDBRow>
-                                    <MDBCol>
-                                        <Autocomplete
-                                            // multiple
-                                            options={régions}
-                                            // getOptionLabel={(option) => option.dep_name}
-                                            onChange={(event, newValue) => {
-                                                setRegion(newValue);
-                                            }}
-                                            value={region}
-                                            renderInput={params => (
-                                                <TextField
-                                                    {...params}
-                                                    variant="standard"
-                                                    label="Région"
-                                                    className={styles.field}
-                                                />
-                                            )}
-                                        />
-                                    </MDBCol>
-                                </MDBRow>
-
-                                <BOUTONREGION />
-                            </Form>
-
-                        </MDBCol>
-
-                        <MDBCol>
-                            <h3 className={styles.statistique_detaillee_search} style={{color: "#5cdd2d"}}>Trouver les gueux par département !</h3>
-
-
-                            <Form onSubmit={handleClickDepartement}>
-                                <MDBRow>
-                                    <MDBCol>
-                                        <Autocomplete
-                                            // multiple
-                                            options={departement}
-                                            getOptionLabel={(option) => option.dep_name}
-                                            onChange={(event, newValue) => {
-
-
-                                                console.log(newValue);
-                                                setDep(newValue);
-                                            }}
-                                            value={dep}
-                                            renderInput={params => (
-                                                <TextField
-                                                    {...params}
-                                                    variant="standard"
-                                                    label="Département"
-                                                    className={styles.field}
-                                                />
-                                            )}
-                                        />
-                                    </MDBCol>
-
-
-                                </MDBRow>
-
-                                <BOUTONDEP />
-                            </Form>
-                        </MDBCol>
-
-
-                    </MDBRow>
-                    <MDBRow>
-
-                        <MDBCol>
-
-                            {result === undefined ?
-
-                                <div className={styles.Results}>
-                                    <span className={styles.Results_content + " text-muted"}>Séléctionner une ville, une région ou un département pour avoir des résultats détaillés.</span>
                                 </div>
 
-                                :
+                                <div className={styles.category_item}>
 
-                                result.length === 0 ?
 
-                                    <div className={styles.Results}>
-                                        <span className={styles.Results_content}>Aucun pauvre trouvé. La pureté il est conservé.</span>
+                                    <img src="/statistique/france.svg" className={styles.category_img} alt="statistique" />
+
+                                    <div className={styles.category_containerTitle}>
+                                        <h3 className={styles.category_title}>Statistique détaillée</h3>
+
                                     </div>
 
-                                    :
+
+                                </div>
+
+                                <div className={styles.category_item}>
 
 
+                                    <img src="/statistique/ranking.svg" className={styles.category_img} alt="statistique" />
 
-                                    <div className={styles.Results}>
-                                        <span>Il y a {result[1].length} gueux dans {result[0].type === "département" ? "ce " :  "cette "}{result[0].type}</span>
+                                    <div className={styles.category_containerTitle}>
+                                        <h3 className={styles.category_title}>Classement</h3>
+
                                     </div>
-                            }
 
-                        </MDBCol>
+                                </div>
 
-
-                    </MDBRow>
-
-                </div>
+                            </div>
 
 
-                <h1 className={styles.news}>De nouvelles statistiques arrivent tout les jours !</h1>
 
-                <Footer />
 
-            </div>
+                        </div>
+
+
+
+                        {/*STATISTIQUE GENERALE*/}
+                        <div className={styles.preStats}>
+
+                            <h3 className={styles.commun_title}>- Statistique générale</h3>
+
+
+                            <div className={styles.preStats_content}>
+                                <div className={styles.preStats_item}>
+
+                                    <span className={styles.preStats_stat}>{countUser}</span>
+
+
+                                    <h3 className={styles.preStats_item_title}>Membres du parti</h3>
+
+
+                                </div>
+
+                                <div className={styles.preStats_item}>
+
+                                    <span className={styles.preStats_stat}>{countGueux}</span>
+
+
+                                    <h3 className={styles.preStats_item_title}>- de 10 repéré</h3>
+
+
+
+
+                                </div>
+                            </div>
+
+                            <div className={styles.preStats_contentLast}>
+
+                                <div className={styles.preStats_content_item}>
+                                    <h3 className={styles.preStats_content_item_title}>Derniers membre enregistrés</h3>
+
+                                    <div className={styles.preStats_contentLast_table}>
+
+                                        <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={lastUser} proSelect />
+
+                                    </div>
+                                </div>
+
+                                <div className={styles.preStats_content_item}>
+                                    <h3 className={styles.preStats_content_item_title}>Derniers moins de 10 enregistrés</h3>
+
+                                    <div className={styles.preStats_contentLast_table}>
+
+                                        <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={lastMoinsDix} proSelect />
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+
+
+                        {/*STATISTIQUE DETAILLEE*/}
+                        <div className={styles.statistique_detaillee}>
+
+                            <h3 className={styles.commun_title}>- Statistique détaillée</h3>
+
+                            <MDBRow className={styles.row}>
+                                <MDBCol>
+                                    <h3 className={styles.statistique_detaillee_search}>Trouver les gueux par ville !</h3>
+
+                                    <Form onSubmit={handleClickVille}>
+                                        <MDBRow>
+                                            <MDBCol>
+                                                <TextField
+                                                    variant="standard"
+                                                    label="Ville"
+                                                    value={ville}
+                                                    onChange={(event) => {
+                                                        setVille(event.target.value);
+                                                    } }
+                                                    className={styles.field}
+                                                />
+                                            </MDBCol>
+
+                                        </MDBRow>
+
+                                        <BOUTONVILLE />
+
+
+                                    </Form>
+                                </MDBCol>
+                                <MDBCol>
+                                    <h3 className={styles.statistique_detaillee_search} style={{color: "#ddb12d"}}>Trouver les gueux par région !</h3>
+
+                                    <Form onSubmit={handleClickRegion}>
+                                        <MDBRow>
+                                            <MDBCol>
+                                                <Autocomplete
+                                                    // multiple
+                                                    options={régions}
+                                                    // getOptionLabel={(option) => option.dep_name}
+                                                    onChange={(event, newValue) => {
+                                                        setRegion(newValue);
+                                                    }}
+                                                    value={region}
+                                                    renderInput={params => (
+                                                        <TextField
+                                                            {...params}
+                                                            variant="standard"
+                                                            label="Région"
+                                                            className={styles.field}
+                                                        />
+                                                    )}
+                                                />
+                                            </MDBCol>
+                                        </MDBRow>
+
+                                        <BOUTONREGION />
+                                    </Form>
+
+                                </MDBCol>
+
+                                <MDBCol>
+                                    <h3 className={styles.statistique_detaillee_search} style={{color: "#5cdd2d"}}>Trouver les gueux par département !</h3>
+
+
+                                    <Form onSubmit={handleClickDepartement}>
+                                        <MDBRow>
+                                            <MDBCol>
+                                                <Autocomplete
+                                                    // multiple
+                                                    options={departement}
+                                                    getOptionLabel={(option) => option.dep_name}
+                                                    onChange={(event, newValue) => {
+
+
+                                                        console.log(newValue);
+                                                        setDep(newValue);
+                                                    }}
+                                                    value={dep}
+                                                    renderInput={params => (
+                                                        <TextField
+                                                            {...params}
+                                                            variant="standard"
+                                                            label="Département"
+                                                            className={styles.field}
+                                                        />
+                                                    )}
+                                                />
+                                            </MDBCol>
+
+
+                                        </MDBRow>
+
+                                        <BOUTONDEP />
+                                    </Form>
+                                </MDBCol>
+
+
+                            </MDBRow>
+                            <MDBRow>
+
+                                <MDBCol>
+
+                                    {result === undefined ?
+
+                                        <div className={styles.Results}>
+                                            <span className={styles.Results_content + " text-muted"}>Séléctionner une ville, une région ou un département pour avoir des résultats détaillés.</span>
+                                        </div>
+
+                                        :
+
+                                        result.length === 0 ?
+
+                                            <div className={styles.Results}>
+                                                <span className={styles.Results_content}>Aucun pauvre trouvé. La pureté il est conservé.</span>
+                                            </div>
+
+                                            :
+
+
+
+                                            <div className={styles.Results}>
+                                                <span>Il y a {result[1].length} gueux dans {result[0].type === "département" ? "ce " :  "cette "}{result[0].type}</span>
+                                            </div>
+                                    }
+
+                                </MDBCol>
+
+
+                            </MDBRow>
+
+                        </div>
+
+
+                        <h1 className={styles.news}>De nouvelles statistiques arrivent tout les jours !</h1>
+
+                        <Footer />
+
+                    </div>
+
+                </>
+
+
+            }
+
+
+
+
         </div>
     )
 
 }
-export async function getServerSideProps() {
-    // Call an external API endpoint to get posts.
-    // You can use any data fetching library
 
-    const server = checkServer();
-
-    const res = await fetch(`${server}/api/getGueux`, {
-        method: "GET",
-        headers: {"Content-Type": "application/json"}
-    });
-
-    const resJson = await res.json()
-
-    const table = {
-        rows: [
-            resJson
-        ]
-    }
-
-    const resUser = await fetch(`${server}/api/getLastUser`, {
-        method: "GET",
-        headers: {"Content-Type": "application/json"}
-    });
-
-    const resJsonUser = await resUser.json()
-
-    const tableUser = {
-        rows: [
-            resJsonUser
-        ]
-    }
-
-
-    const res1 = await fetch(`${server}/api/getCountUser`, {
-        method: "GET",
-        headers: {"Content-Type": "application/json"}
-    });
-
-    const countUser = await res1.json()
-
-    const res2 = await fetch(`${server}/api/getCountGueux`, {
-        method: "GET",
-        headers: {"Content-Type": "application/json"}
-    });
-
-    const countGueux = await res2.json()
-
-    // By returning { props: { posts } }, the Blog component
-    // will receive `posts` as a prop at build time
-    return {
-        props: {
-            table,
-            tableUser,
-            countUser,
-            countGueux,
-        },
-    }
-}
 
 
