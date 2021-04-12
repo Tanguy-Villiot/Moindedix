@@ -78,7 +78,7 @@ export default function Index(){
 
                         <div className={styles.step_content}>
 
-                            <span className={styles.step_text}>Réunissons vous entre entre personne du même caste et organiser des battus afin de bouter les moins de <span style={{color: "#dd2d2d"}}>10</span> à venir sur le site.</span>
+                            <span className={styles.step_text}>Réunissons vous entre entre personne de même caste et organiser des battus afin de bouter les moins de <span style={{color: "#dd2d2d"}}>10</span> à venir sur le site.</span>
 
                         </div>
 
