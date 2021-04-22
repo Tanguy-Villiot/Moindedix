@@ -27,7 +27,7 @@ export default function Ankward(){
 
             <div className={"p-5 " + styles.content}>
 
-                <h3 className={styles.text}><a href="https://www.instagram.com/ankward.fr/contact" target="_blank" className={styles.link}><img src="/communaute/instagram.svg" className={styles.imgReseaux} alt="instagram" /><span style={{fontFamily: "Inter-Bold"}}>@Ankward.fr</span></a></h3>
+                <h3 className={styles.text}><a href="https://www.instagram.com/ankward.fr" target="_blank" className={styles.link}><img src="/communaute/instagram.svg" className={styles.imgReseaux} alt="instagram" /><span style={{fontFamily: "Inter-Bold"}}>@Ankward.fr</span></a></h3>
 
                 <h3 className={styles.text}><a href="mailto: creation@ankward.fr" target="_blank" className={styles.link}><span style={{fontFamily: "Inter-Bold"}}><img src="/gmail.svg" className={styles.imgReseaux} alt="email" />creation@ankward.fr</span></a></h3>
 

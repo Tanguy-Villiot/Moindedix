@@ -9,13 +9,13 @@ import {MDBCol, MDBRow} from "mdbreact";
 import Footer from "../component/footer/footer";
 import checkServer from "../component/checkServer";
 import publicIp from "public-ip";
+import StyledContentLoader from 'styled-content-loader'
+
 
 const server = checkServer();
 
 
 export async function checkIp(){
-
-    const server = checkServer();
 
 
     const ip = await publicIp.v6({
@@ -36,6 +36,8 @@ export async function checkIp(){
 
 
 export default function Home() {
+
+    const [loading, setLoading] = useState(true);
 
     const router = useRouter();
 
@@ -592,7 +594,15 @@ export default function Home() {
 
         const val = evt.target.value;
 
-        setValue(val);
+        if(val > 9999999)
+        {
+
+        }
+        else {
+            setValue(val);
+        }
+
+
 
 
         if(value != null && value != undefined && dep != null && dep != undefined && location != null && location != undefined)
@@ -736,10 +746,18 @@ export default function Home() {
                 .then(res => {
 
                     setCountUser(res);
+
+                    getGueux()
+                        .then(res2 =>
+                        {
+                            setCountGueux(res2)
+
+                            setLoading(false);
+
+                        })
+
                 });
 
-            getGueux()
-                .then(res => setCountGueux(res))
 
 
 
@@ -826,7 +844,14 @@ export default function Home() {
 
                         <div className={styles.statistiques_item}>
 
-                            <span className={styles.statistiques_stat}>{countUser}+</span>
+                            <StyledContentLoader
+                                backgroundColor="#eed9ee"
+                                isLoading={loading}
+                            >
+                                <span className={styles.statistiques_stat}>{countUser}+</span>
+
+                            </StyledContentLoader>
+
 
                             <h3 className={styles.statistiques_title}>Membres du parti</h3>
 
@@ -835,7 +860,13 @@ export default function Home() {
 
                         <div className={styles.statistiques_item}>
 
-                            <span className={styles.statistiques_stat}>{countGueux}+</span>
+                            <StyledContentLoader
+                                backgroundColor="#eed9ee"
+                                isLoading={loading}
+                            >
+                                <span className={styles.statistiques_stat}>{countGueux}+</span>
+
+                            </StyledContentLoader>
 
 
                             <h3 className={styles.statistiques_title}>Moins de 10 repéré</h3>
@@ -891,6 +922,7 @@ export default function Home() {
                                         aria-describedby="inputGroupPrepend"
                                         value={value}
                                         onChange={handleChange}
+                                        maxLength={10}
                                         required
                                     />
                                     <InputGroup.Append>

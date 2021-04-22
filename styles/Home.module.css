@@ -53,7 +53,7 @@
   width: 50%;
   height: 2px;
   background-color: #a2a2a261;
-  margin: auto auto 4em;
+  margin: auto auto 7em;
   border-radius: 10px;
 }
 
@@ -63,7 +63,7 @@
 {
   display: flex;
   align-items: center;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 
 .statistiques_item
@@ -81,6 +81,7 @@
   font-size: 1.2em;
   text-align: left;
   line-height: 1.50em;
+  text-transform: uppercase;
 }
 
 .statistiques_stat
@@ -95,15 +96,15 @@
 
 .statistiques_title
 {
-  font-family: Inter-Light;
+  font-family: Inter;
   text-transform: uppercase;
   font-size: 1em;
-  color: black;
+  color: #a1a1a1;
 }
 
 .statistiques_button_contain
 {
-  margin-bottom: 5em;
+  margin-bottom: 9em;
   padding-right: 4em;
 }
 
@@ -141,7 +142,7 @@
 {
   display: flex;
   align-items: center;
-  margin-bottom: 1.5em;
+  margin-bottom: 3em;
 }
 
 .france
@@ -169,6 +170,7 @@
 {
   /*background: linear-gradient(90deg, rgb(147, 202, 216, 0.5) 0%, rgb(224, 216, 231, 0.5) 50%, rgb(207, 63, 59, 0.5) 100%);*/
   background-color: #def0fc;
+  /*background-color: #eed9ee;*/
   padding: 2em;
   border-radius: 15px;
 }
