@@ -3,16 +3,22 @@ import { Button, Form} from "react-bootstrap";
 import {MDBCol, MDBDataTableV5, MDBRow} from "mdbreact";
 import {TextField} from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useRouter} from "next/router";
 import checkServer from "../../component/checkServer";
 import NavbarSite from "../../component/navbar/navbar";
 import Footer from "../../component/footer/footer";
 import {getCountGueux, getCountUser, getGueux, getLastUser} from "../../component/statistique/model";
 
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCampground, faEuroSign} from "@fortawesome/free-solid-svg-icons";
+
 const server = checkServer();
 
 export default function Statistique(){
+
+    const generale = useRef(null)
+    const detaille = useRef(null)
 
     const [loading, setLoading] = useState(true);
 
@@ -648,6 +654,8 @@ export default function Statistique(){
             }
         ]
 
+        console.log(resul)
+
         resul.push(await res.json())
 
 
@@ -674,6 +682,9 @@ export default function Statistique(){
                 type: "département"
             }
         ]
+
+        console.log(resul)
+
 
         resul.push(await res.json())
 
@@ -849,7 +860,9 @@ export default function Statistique(){
 
                             <div className={styles.category_Row}>
 
-                                <div className={styles.category_item}>
+                                <div className={styles.category_item} style={{backgroundColor: "rgba(0, 123, 255, 0.19)"}} onClick={() => generale.current.scrollIntoView({
+                                    behavior: "smooth",
+                                })}>
 
                                     <img src="/statistique/statistics.svg" className={styles.category_img} alt="statistique" />
 
@@ -860,7 +873,9 @@ export default function Statistique(){
 
                                 </div>
 
-                                <div className={styles.category_item}>
+                                <div className={styles.category_item} style={{backgroundColor: "rgba(255, 0, 0, 0.19)"}} onClick={() => detaille.current.scrollIntoView({
+                                    behavior: "smooth",
+                                })}>
 
 
                                     <img src="/statistique/france.svg" className={styles.category_img} alt="statistique" />
@@ -873,7 +888,7 @@ export default function Statistique(){
 
                                 </div>
 
-                                <div className={styles.category_item}>
+                                <div className={styles.category_item_classement}>
 
 
                                     <img src="/statistique/ranking.svg" className={styles.category_img} alt="statistique" />
@@ -895,7 +910,7 @@ export default function Statistique(){
 
 
                         {/*STATISTIQUE GENERALE*/}
-                        <div className={styles.preStats}>
+                        <div ref={generale} className={styles.preStats}>
 
                             <h3 className={styles.commun_title}>- Statistique générale</h3>
 
@@ -954,7 +969,7 @@ export default function Statistique(){
 
 
                         {/*STATISTIQUE DETAILLEE*/}
-                        <div className={styles.statistique_detaillee}>
+                        <div ref={detaille} className={styles.statistique_detaillee}>
 
                             <h3 className={styles.commun_title}>- Statistique détaillée</h3>
 
@@ -1064,18 +1079,34 @@ export default function Statistique(){
 
                                         :
 
-                                        result.length === 0 ?
+                                        result[1].length === 0 ?
 
                                             <div className={styles.Results}>
-                                                <span className={styles.Results_content}>Aucun pauvre trouvé. La pureté il est conservé.</span>
+                                                <span className={styles.Results_content}>Aucun moins de <span style={{color: "rgb(221, 45, 45)"}}>10</span> trouvé. La pureté y est conservée.</span>
                                             </div>
 
                                             :
 
 
-
                                             <div className={styles.Results}>
-                                                <span>Il y a {result[1].length} gueux dans {result[0].type === "département" ? "ce " :  "cette "}{result[0].type}</span>
+                                                <MDBRow className={styles.ResultsRow}>
+                                                    <MDBCol>
+                                                        <MDBRow className={styles.ResultsRow}>
+                                                            <FontAwesomeIcon icon={faCampground} style={{color: 'rgb(255, 0, 0)', marginRight: "1em", marginLeft: "1em"}}/><span className={styles.ResultsText}>Il y a {result[1][1].length} gueux dans {result[0].type === "département" ? "ce " :  "cette "}{result[0].type}</span><br/>
+
+                                                        </MDBRow>
+
+                                                        <MDBRow className={styles.ResultsRow}>
+                                                            <FontAwesomeIcon icon={faEuroSign} style={{color: 'rgb(0, 124, 255)', marginRight: "1em", marginLeft: "1em"}}/><span className={styles.ResultsText}>Il y a {result[1][0].length} plus de <span style={{color: "rgb(221, 45, 45)"}}>10</span> dans {result[0].type === "département" ? "ce " :  "cette "}{result[0].type}</span>
+
+                                                        </MDBRow>
+                                                    </MDBCol>
+                                                    <MDBCol className={styles.ResultsRow}>
+
+                                                        <h1 className={styles.ResultsScore}>SCORE : <span style={{color: "blue"}}>{Math.round((result[1][0].length / result[1][1].length) * 100) / 100}</span></h1>
+
+                                                    </MDBCol>
+                                                </MDBRow>
                                             </div>
                                     }
 
@@ -1086,6 +1117,12 @@ export default function Statistique(){
 
                         </div>
 
+
+                        {/*/!*CLASSEMENT*!/*/}
+                        {/*<div ref={detaille} className={styles.statistique_detaillee}>*/}
+                        {/*    <h3 className={styles.commun_title}>- Classement</h3>*/}
+
+                        {/*</div>*/}
 
                         <h1 className={styles.news}>De nouvelles statistiques arrivent tout les jours !</h1>
                         <h3 className={styles.newsSubtitle}>(et de nouveaux moyens de comparaison également)</h3>

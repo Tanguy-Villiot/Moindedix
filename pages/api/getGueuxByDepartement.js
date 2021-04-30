@@ -12,12 +12,28 @@ handler.post(async (req, res) => {
 
     console.log(data);
 
-    let doc = await req.db.collection("recensement").find({departement: data.departement}).toArray(function(err, result) {
+    let results = []
+
+    let doc = await req.db.collection("recensement").find({departement: data.departement}).toArray(async function(err, result) {
         if (err) throw err;
 
-        console.log(result)
+        results = result
 
-        return res.json(result);
+        let doc2 = await req.db.collection("user").find({departement: data.departement}).toArray(function(errer, resulte) {
+            if (errer) throw err;
+
+            results = [
+                resulte,
+                results
+            ]
+
+            // console.log(JSON.parse(results))
+
+            return res.json(results);
+
+
+        });
+
     });
 
 
