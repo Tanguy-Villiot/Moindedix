@@ -787,7 +787,7 @@ export default function Home() {
 
     // console.log(countUser);
 
-    return (
+  /***  return (
         <div className={styles.appli}>
             <div className={styles.container}>
 
@@ -1009,6 +1009,11 @@ export default function Home() {
 
             <Footer />
 
+        </div>
+  ) **/
+    
+      return (
+        <div>
         </div>
   )
 }
